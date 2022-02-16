@@ -1,12 +1,14 @@
 <template>
   <audio ref="audio" loop id="audio"
          :src="`https://music.163.com/song/media/outer/url?id=${songDetail.id}.mp3`"></audio>
-  <el-row :gutter="20" style="z-index: 10000000 !important;" :style="{background:color}">
+  <el-row :gutter="20" style="z-index: 10000000 !important;" :style="{backgroundColor:backgroundColor}">
     <el-col :span="7">
       <div class="title" @mouseenter="open = true" @mouseleave="open = false">
-        <i v-show="open" v-if="drawer === false" @click="drawer = true" class="iconfont el-icon-arrow-up" style="color: white;"></i>
+        <i v-show="open" v-if="drawer === false" @click="drawer = true" class="iconfont el-icon-arrow-up"
+           style="color: white;"></i>
         <i v-show="open" v-else @click="drawer = false" class="iconfont el-icon-arrow-down" style="color: white;"></i>
-        <el-avatar :class="[open ? 'active' : '']" @click="drawer = true" shape="square" :size="50" :src="songDetail.al.picUrl"></el-avatar>
+        <el-avatar :class="[open ? 'active' : '']" @click="drawer = true" shape="square" :size="50"
+                   :src="songDetail.al.picUrl"></el-avatar>
         <div class="music-title">
           {{songDetail.name}}
         </div>
@@ -68,17 +70,18 @@
         currentTime: 0,
         size: 0,
         dom: null,
-        color: '#ffffff'
+        backgroundColor: '#ffffff'
       })
 
       watch(() => state.drawer, newValue => {
         state.size = 100
         console.log(1)
-        console.log( state.drawer)
+        console.log(state.drawer)
         if (newValue) {
-          state.color = '#d7b0d9'
+          state.backgroundColor = undefined
+          // state.color = '#d7b0d9'
         } else {
-          state.color = '#ffffff'
+          state.backgroundColor = '#ffffff'
         }
       })
 
