@@ -37,15 +37,15 @@
   const store = useStore()
 
   const name = ref('app') // 模块名称
-  const app = ref({width: '1423px'}) // 模块名称
-  const aside = ref({width: '196px'}) // 模块名称
+  const app = ref({width: '1423px'}) // 容器宽度
+  const aside = ref({width: '196px'}) // 侧边栏宽度
   const footer = ref({backgroundColor: 'white'}) // 模块名称
 
   onMounted(() => {
     if (document.documentElement.clientWidth < 1440) {
       store.commit('setBoolean')
-      app.width.value = '1240px'
-      aside.width.value = '70px'
+      app.value.width.value = '1240px'
+      aside.value.width.value = '70px'
     }
   })
 

@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 import {getUserNum} from "@/network/user.js";
 
@@ -9,29 +9,29 @@ import singer from '@/store/singer.js'
 
 export default createStore({
   //配置插件
-  plugins:[createPersistedState({
-    paths:['login','songDetail','commentData','singer']
+  plugins: [createPersistedState({
+    paths: ['login', 'songDetail', 'commentData', 'singer']
   })],
   state: {
-    isPlay:false,
-    boolean:false,
-    data:null
+    isPlay: false,
+    boolean: false,
+    data: null
   },
   mutations: {
-    setPlay(state){
+    setPlay(state) {
       state.isPlay = !state.isPlay
     },
-    setBoolean(state){
+    setBoolean(state) {
       state.boolean = true
     },
-    setData(state,payload){
+    setData(state, payload) {
       state.data = payload
     }
   },
   actions: {
-    getUserNumber(context){
+    getUserNumber(context) {
       getUserNum().then(res => {
-        context.commit('setData',res?.data)
+        context.commit('setData', res?.data)
       })
     }
   },
