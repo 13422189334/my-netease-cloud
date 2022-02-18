@@ -100,8 +100,11 @@ eventBus.on('hotSearch',keyword => {
   search()
 })
 
+/**
+ * 接收底部音乐推送的歌词
+ * */
 let name = ref()
-eventBus.on('active',value => {
+eventBus.on('sync-lyric',value => {
   name.value = value
 })
 </script>

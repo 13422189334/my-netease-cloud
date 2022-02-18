@@ -48,7 +48,7 @@
   </el-row>
   <!--  弹出层-->
   <el-drawer :with-header="false" :append-to-body="true" v-model="drawer" direction="btt" :size="`${size}%`">
-    <lyric-popup @scrollPlay="scrollPlay" ref="dom" @close="closePopup" :currentTime="currentTime" />
+    <lyric-popup ref="dom" :currentTime="currentTime" @closeLyricPopup="closePopup" @scrollPlay="scrollPlay"/>
   </el-drawer>
 </template>
 
