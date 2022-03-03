@@ -1,7 +1,7 @@
 <template>
   <el-container :style="app">
     <el-header>
-      <top></top>
+      <headers/>
     </el-header>
     <el-container>
       <el-aside :style="aside">
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-  import Top from '@/views/Top/top.vue'
+  import Headers from '@/views/Header/index.vue'
   import AsideBar from '@/views/Aside/AsideBar.vue'
   import MusicPanel from '@/views/MusicPanel/index.vue'
   import {ref, defineComponent, onMounted} from "vue"
