@@ -9,26 +9,20 @@
         :key="index"
         :class="[
           'box-main-nav',
-          currentTime >= item.time && currentTime < lyricArr[index+1].time ? 'activeLyric' : ''
+          isScroll ? 'scroll-pointer' : '',
+          currentTime >= item.time && currentTime < lyricArr[index+1].time ? 'active-lyric' : ''
         ]"
+        @click="scrollPlay(item.time)"
       >
         {{item.lyric}}
       </nav>
     </main>
-    <div id="box-divider" class="box-divider" v-show="isShow" @click="scrollPlay">
-      <span>{{$formatTime(scrollTime).slice(-5)}}</span>
-      <el-divider></el-divider>
-      <span class="el-icon-caret-right"></span>
-    </div>
   </section>
 </template>
 
 <script setup>
-  import {getLyric} from "@/network/song.js";
   import {computed, nextTick, onMounted, ref, watch, defineProps, defineEmits} from "vue";
   import {useStore} from "vuex";
-  import {formatLyric} from "@/utlis/formatData.js";
-  import eventBus from '@/utlis/eventbus.js'
 
   /**
    * 定义父组件参数 currentTime
@@ -36,6 +30,9 @@
   const props = defineProps({
     currentTime: {
       type: Number
+    },
+    lyricArr: {
+      type: Array
     }
   })
 
@@ -46,17 +43,14 @@
 
   const store = useStore()
   let dom = ref()
-  let lyricArr = ref([]) // 歌词数组
   let lyricNavArr = ref([]) // 歌词nav数组
   const songDetail = computed(() => store.state.songDetail.songDetail)
 
   /**
    * 格式化歌词，同时记录页面渲染歌词nav的信息
    * */
-  watch(songDetail, async newValue => {
-    let res = await getLyric(newValue.id)
-    lyricArr.value = formatLyric(res.data.lrc.lyric)
-    await nextTick(() => {
+  watch(props.lyricArr,  newValue => {
+    nextTick(() => {
       lyricNavArr.value = [...document.querySelectorAll('.box-main-nav')]
     })
   }, {immediate: true})
@@ -64,12 +58,10 @@
 
   /**
    * 监听父组件每0.5秒传入的currentTime控制歌词滚动
-   * 将歌词同步到顶部
    * */
   watch(() => {
-    return lyricArr?.value.findIndex((item, index) => props.currentTime >= item.time && props.currentTime < lyricArr.value[index + 1].time)
+    return props.lyricArr?.findIndex((item, index) => props.currentTime >= item.time && props.currentTime < props.lyricArr[index + 1].time)
   }, newIndex => {
-    eventBus.emit('sync-lyric', lyricArr?.value[newIndex]?.lyric)
     if (newIndex > 5) {
       dom.value.scrollTop = 50 * (newIndex - 5)
     }
@@ -82,39 +74,25 @@
     emit('closeLyricPopup')
   }
 
-  let isShow = ref(false) // 是否显示滚轮横线
-  let scrollTime = ref() // 拖动停止的歌词时间
+  let isScroll = ref(false) // 是否滚轮
   let scrollTimer // 滚轮事件计时器
   /**
    * 监听鼠标滚轮事件
    * */
   addEventListener('mousewheel', () => {
-    isShow.value = true
-    let index = lyricNavArr.value.findIndex(item => item.offsetTop > dom.value.scrollTop)
-    if (index !== -1) {
-      lyricNavArr.value.forEach((item, idx) => {
-        item.style.color = idx === index + 5 ? 'red' : ''
-      })
-      scrollTime.value = lyricArr.value[index + 5].time
-    }
+    isScroll.value = true
     clearTimeout(scrollTimer)
     scrollTimer = setTimeout(() => {
-      isShow.value = false
-      lyricNavArr.value.forEach(item => {
-        item.style.color = ''
-      })
-    }, 1500)
+      isScroll.value = false
+    }, 3000)
   })
 
 
   /**
    * 鼠标滚轮事件调整事件
    * */
-  const scrollPlay = () => {
-    lyricNavArr.value.forEach(item => {
-      item.style.color = ''
-    })
-    emit('scrollPlay', scrollTime.value)
+  const scrollPlay = (scrollTime) => {
+    emit('scrollPlay', scrollTime)
   }
 
 </script>
@@ -167,7 +145,11 @@
         line-height: 50px;
       }
 
-      .activeLyric {
+      .scroll-pointer {
+        cursor: pointer;
+      }
+
+      .active-lyric {
         cursor: pointer;
         background-image: -webkit-linear-gradient(bottom, red, #ff5f60, #f0c41b);
         -webkit-background-clip: text;

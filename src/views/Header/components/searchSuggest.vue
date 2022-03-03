@@ -16,9 +16,10 @@
 
 <script setup>
 import eventBus from '@/utlis/eventbus.js'
+import {defineProps} from 'vue'
+import {useStore} from "vuex";
 import {useRouter} from "vue-router";
 import {formatAlbum} from "@/utlis/formatData.js";
-import {useStore} from "vuex";
 import {getAlbumContent} from "@/network/comment.js";
 
 defineProps({

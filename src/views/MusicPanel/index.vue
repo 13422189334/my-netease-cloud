@@ -48,16 +48,17 @@
   </el-row>
   <!--  弹出层-->
   <el-drawer :with-header="false" :append-to-body="true" v-model="drawer" direction="btt" :size="`${size}%`">
-    <lyric-popup ref="dom" :currentTime="currentTime" @closeLyricPopup="closePopup" @scrollPlay="scrollPlay"/>
+    <lyric-popup ref="dom" :currentTime="currentTime" :lyricArr="lyricArr" @closeLyricPopup="closePopup" @scrollPlay="scrollPlay"/>
   </el-drawer>
 </template>
 
 <script setup>
-  import {getLikeMusic} from "@/network/song.js";
+  import {getLikeMusic, getLyric} from "@/network/song.js";
   import {ElMessage} from 'element-plus'
   import {likeMusic} from "@/network/user.js";
   import {debounce} from "@/utlis/debounce.js";
   import eventBus from '@/utlis/eventbus.js'
+  import {formatLyric} from "@/utlis/formatData.js";
   import {
     defineAsyncComponent,
     ref,
@@ -73,7 +74,9 @@
   const emit = defineEmits(['updateBackgroundColor'])
   const name = ref('musicPanel') // 组件名
 
+  const songDetail = computed(() => store.state.songDetail.songDetail)
   let audio = ref(null) // 歌曲
+  let lyricArr = ref() // 歌词
   let like = ref(false) // 音乐是否点赞收藏
   let isPlay = ref(false) // 音乐是否播放中
   let currentTime = ref(0) // 歌曲播放进度
@@ -168,10 +171,16 @@
 
   /**
    * 记录 歌曲播放时间
+   * 将歌词同步到顶部
    * */
   const play = () => {
     currentTime.value = parseInt(audio.value.currentTime * 1000)
     sliderPercent.value = parseInt(audio.value.currentTime / audio.value.duration * 100)
+
+    // 同步歌词
+    const currentIndex = lyricArr?.value.findIndex((item, index) => currentTime.value >= item.time && currentTime.value < lyricArr.value[index + 1].time)
+    eventBus.emit('sync-lyric', lyricArr?.value[currentIndex]?.lyric)
+
     //自动切换
     if (audio.value.currentTime >= audio.value.duration - 0.5) {
       console.log('播放结束')
@@ -222,12 +231,16 @@
     }
   }
 
-  const songDetail = computed(() => store.state.songDetail.songDetail)
   /**
    * 监听切换的音乐的收藏状态
+   * 查询歌词
    * */
-  watch(songDetail, () => {
+  watch(songDetail, async newValue => {
+    console.log('加载音乐-----', newValue.name, songDetail.value.id)
     like.value = store.state.singer.likeMusic.includes(songDetail.value.id)
+
+    let res = await getLyric(newValue.id)
+    lyricArr.value = formatLyric(res.data.lrc.lyric)
   }, {deep: true, immediate: true})
 
   eventBus.on('playMusic', () => {
