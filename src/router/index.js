@@ -27,7 +27,7 @@ const routes = [
       {
         path: 'songMenu',
         component: () => import('@/views/Search/pages/songMenu.vue')
-      },
+      }
     ]
   },
   {
@@ -76,7 +76,7 @@ const routes = [
   },
   {
     path: '/podcast',
-    component: () => import('@/views/Aside/podcast/podcast.vue'),
+    component: () => import('@/views/Aside/podcast/index.vue'),
     children: [
       {
         path: '',
