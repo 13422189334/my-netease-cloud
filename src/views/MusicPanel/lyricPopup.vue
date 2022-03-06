@@ -25,14 +25,16 @@
   import {useStore} from "vuex";
 
   /**
-   * 定义父组件参数 currentTime
+   * 定义父组件参数 currentTime, lyricArr
    * */
   const props = defineProps({
     currentTime: {
-      type: Number
+      type: Number,
+      remark: '歌曲播放时间点'
     },
     lyricArr: {
-      type: Array
+      type: Array,
+      remark: '歌词数组'
     }
   })
 
