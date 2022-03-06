@@ -5,7 +5,7 @@
     </el-header>
     <el-container>
       <el-aside :style="aside">
-        <aside-bar></aside-bar>
+        <aside-bar :style="aside"/>
       </el-aside>
       <el-main>
         <el-scrollbar>
@@ -28,27 +28,43 @@
 </template>
 
 <script setup>
-  import Headers from '@/views/Header/index.vue'
-  import AsideBar from '@/views/Aside/AsideBar.vue'
-  import MusicPanel from '@/views/MusicPanel/index.vue'
-  import {ref, defineComponent, onMounted} from "vue"
-  import {useStore} from "vuex";
+import { ref, watch, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import Headers from '@/views/Header/index.vue'
+import AsideBar from '@/views/Aside/index.vue'
+import MusicPanel from '@/views/MusicPanel/index.vue'
 
-  const store = useStore()
+const store = useStore()
+const app = ref({ width: '1423px' }) // 容器宽度
+const aside = ref({ width: '196px' }) // 侧边栏宽度
+const footer = ref({ backgroundColor: 'white' }) // 模块名称
 
-  const name = ref('app') // 模块名称
-  const app = ref({width: '1423px'}) // 容器宽度
-  const aside = ref({width: '196px'}) // 侧边栏宽度
-  const footer = ref({backgroundColor: 'white'}) // 模块名称
+// 暂时未生效
+// watch(() => document.documentElement.clientWidth, newClientWith => {
+//   console.log(newClientWith)
+//   if (newClientWith < 1440) {
+//     store.commit('setBoolean', true)
+//     app.value.width = '1240px'
+//     aside.value.width = '70px'
+//   } else {
+//     store.commit('setBoolean', false)
+//     app.value.width = '1423px'
+//     aside.value.width = '196px'
+//   }
+// }, {immediate:true, deep: true})
 
-  onMounted(() => {
-    if (document.documentElement.clientWidth < 1440) {
-      store.commit('setBoolean')
-      app.value.width.value = '1240px'
-      aside.value.width.value = '70px'
-    }
-  })
-
+onMounted(() => {
+  alert(document.documentElement.clientWidth)
+  if (document.documentElement.clientWidth < 1440) {
+    store.commit('setBoolean', true)
+    app.value.width = '1240px'
+    aside.value.width = '70px'
+  } else {
+    store.commit('setBoolean', false)
+    app.value.width = '1423px'
+    aside.value.width = '196px'
+  }
+})
 
 </script>
 <style>

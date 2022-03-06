@@ -1,8 +1,8 @@
 <template>
   <section id="section">
-    <i class="el-icon-close" @click="close"></i>
-    <header class="header-header">{{songDetail.name}}</header>
-    <main class="box-main" ref="dom">
+    <i class="el-icon-close" @click="close" />
+    <header class="header-header">{{ songDetail.name }}</header>
+    <main ref="dom" class="box-main">
       <nav
         v-for="(item,index) in lyricArr"
         id="box-main-nav"
@@ -14,93 +14,90 @@
         ]"
         @click="scrollPlay(item.time)"
       >
-        {{item.lyric}}
+        {{ item.lyric }}
       </nav>
     </main>
   </section>
 </template>
 
 <script setup>
-  import {computed, nextTick, onMounted, ref, watch, defineProps, defineEmits} from "vue";
-  import {useStore} from "vuex";
+import { computed, nextTick, ref, watch, defineProps, defineEmits } from 'vue'
+import { useStore } from 'vuex'
 
-  /**
-   * 定义父组件参数 currentTime, lyricArr
-   * */
-  const props = defineProps({
-    currentTime: {
-      type: Number,
-      remark: '歌曲播放时间点'
-    },
-    lyricArr: {
-      type: Array,
-      remark: '歌词数组'
-    }
-  })
-
-  /**
-   * 定义子组件emit事件 close scrollPlay
-   * */
-  const emit = defineEmits(['closeLyricPopup', 'scrollPlay'])
-
-  const store = useStore()
-  let dom = ref()
-  let lyricNavArr = ref([]) // 歌词nav数组
-  const songDetail = computed(() => store.state.songDetail.songDetail)
-
-  /**
-   * 格式化歌词，同时记录页面渲染歌词nav的信息
-   * */
-  watch(props.lyricArr,  newValue => {
-    nextTick(() => {
-      lyricNavArr.value = [...document.querySelectorAll('.box-main-nav')]
-    })
-  }, {immediate: true})
-
-
-  /**
-   * 监听父组件每0.5秒传入的currentTime控制歌词滚动
-   * */
-  watch(() => {
-    return props.lyricArr?.findIndex((item, index) => props.currentTime >= item.time && props.currentTime < props.lyricArr[index + 1].time)
-  }, newIndex => {
-    if (newIndex > 5) {
-      dom.value.scrollTop = 50 * (newIndex - 5)
-    }
-  })
-
-  /**
-   * 关闭popup函数
-   * */
-  const close = () => {
-    emit('closeLyricPopup')
+/**
+ * 定义父组件参数 currentTime, lyricArr
+ **/
+const props = defineProps({
+  currentTime: {
+    type: Number,
+    remark: '歌曲播放时间点'
+  },
+  lyricArr: {
+    type: Array,
+    remark: '歌词数组'
   }
+})
 
-  let isScroll = ref(false) // 是否滚轮
-  let scrollTimer // 滚轮事件计时器
-  /**
-   * 监听鼠标滚轮事件
-   * */
-  addEventListener('mousewheel', () => {
-    isScroll.value = true
-    clearTimeout(scrollTimer)
-    scrollTimer = setTimeout(() => {
-      isScroll.value = false
-    }, 3000)
+/**
+ * 定义子组件emit事件 close scrollPlay
+ **/
+const emit = defineEmits(['closeLyricPopup', 'scrollPlay'])
+
+const store = useStore()
+const dom = ref()
+const lyricNavArr = ref([]) // 歌词nav数组
+const songDetail = computed(() => store.state.songDetail.songDetail)
+
+/**
+ * 格式化歌词，同时记录页面渲染歌词nav的信息
+ **/
+watch(props.lyricArr, newValue => {
+  nextTick(() => {
+    lyricNavArr.value = [...document.querySelectorAll('.box-main-nav')]
   })
+}, { immediate: true })
 
-
-  /**
-   * 鼠标滚轮事件调整事件
-   * */
-  const scrollPlay = (scrollTime) => {
-    emit('scrollPlay', scrollTime)
+/**
+ * 监听父组件每0.5秒传入的currentTime控制歌词滚动
+ **/
+watch(() => {
+  return props.lyricArr?.findIndex((item, index) => props.currentTime >= item.time && props.currentTime < props.lyricArr[index + 1].time)
+}, newIndex => {
+  if (newIndex > 5) {
+    dom.value.scrollTop = 50 * (newIndex - 5)
   }
+})
+
+/**
+ * 关闭popup函数
+ **/
+const close = () => {
+  emit('closeLyricPopup')
+}
+
+const isScroll = ref(false) // 是否滚轮
+let scrollTimer // 滚轮事件计时器
+/**
+ * 监听鼠标滚轮事件
+ **/
+addEventListener('mousewheel', () => {
+  isScroll.value = true
+  clearTimeout(scrollTimer)
+  scrollTimer = setTimeout(() => {
+    isScroll.value = false
+  }, 3000)
+})
+
+/**
+ * 鼠标滚轮事件调整事件
+ **/
+const scrollPlay = (scrollTime) => {
+  emit('scrollPlay', scrollTime)
+}
 
 </script>
 
 <style scoped lang="less">
-
 
   #section {
     width: 100%;
@@ -183,6 +180,5 @@
       }
     }
   }
-
 
 </style>
