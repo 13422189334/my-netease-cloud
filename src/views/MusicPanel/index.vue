@@ -11,7 +11,7 @@
         <el-avatar
           :class="[mouseenter ? 'active' : '']"
           shape="square"
-          size="50"
+          size="default"
           :src="songDetail.al.picUrl"
           @click="changeDrawer(true)"
         />

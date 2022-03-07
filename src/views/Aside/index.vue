@@ -1,5 +1,5 @@
 <template>
-  <el-menu :collapse="$store.state.boolean" class="aside" :default-active="$route.path" router popper-append-to-body>
+  <el-menu :collapse="boolean" class="aside" :default-active="$route.path" router popper-append-to-body>
     <el-menu-item
       v-for="menuItem in menus"
       :index="menuItem.index"
@@ -12,7 +12,8 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue'
+import { defineProps, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 
 const props = defineProps({
   style: {
@@ -20,6 +21,10 @@ const props = defineProps({
     remark: '同步父组件sidebar的宽度样式'
   }
 })
+
+const store = useStore()
+const boolean = computed(() => store.state.boolean)
+const iconMarginRight = computed(() => store.state.boolean ? '0px' : '10px')
 
 const menus = ref([
   { index: '/findMusic', icon: 'iconfont icon-yinle1', title: '发现音乐' },
@@ -36,8 +41,11 @@ const menus = ref([
 </script>
 
 <style scoped lang="less">
+  /deep/.el-menu-tooltip__trigger {
+    padding: 0 24px !important;
+  }
   .iconfont {
-    margin-right: 10px;
+    margin-right: v-bind('iconMarginRight');
     font-size: 20px;
   }
 
