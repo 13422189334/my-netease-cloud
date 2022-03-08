@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory} from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
@@ -36,40 +36,18 @@ const routes = [
   },
   {
     path: '/findMusic',
-    component: () => import('@/views/Aside/findMusic/findMusic.vue'),
+    component: () => import('@/views/Aside/findMusic/index.vue'),
     children: [
-      {
-        path: '',
-        component: () => import('@/views/Aside/findMusic/pages/recommend.vue')
-      },
-      {
-        path: 'exclusive',
-        component: () => import('@/views/Aside/findMusic/pages/exclusive.vue')
-      },
-      {
-        path: 'songMenu',
-        component: () => import('@/views/Aside/findMusic/pages/songMenu.vue')
-      },
-      {
-        path: 'topList',
-        component: () => import('@/views/Aside/findMusic/pages/topList.vue')
-      },
-      {
-        path: 'singer',
-        component: () => import('@/views/Aside/findMusic/pages/singer.vue')
-      },
-      {
-        path: 'newMusic',
+      { path: '', component: () => import('@/views/Aside/findMusic/pages/recommend.vue') },
+      { path: 'exclusive', component: () => import('@/views/Aside/findMusic/pages/exclusive.vue') },
+      { path: 'songMenu', component: () => import('@/views/Aside/findMusic/pages/songMenu.vue') },
+      { path: 'topList', component: () => import('@/views/Aside/findMusic/pages/topList.vue') },
+      { path: 'singer', component: () => import('@/views/Aside/findMusic/pages/singer.vue') },
+      { path: 'newMusic',
         component: () => import('@/views/Aside/findMusic/pages/newMusic.vue'),
         children: [
-          {
-            path: '',
-            component: () => import('@/views/Aside/findMusic/pages/newMusic/newSong.vue')
-          },
-          {
-            path: 'newAlbum',
-            component: () => import('@/views/Aside/findMusic/pages/newMusic/newAlbum.vue')
-          }
+          { path: '', component: () => import('@/views/Aside/findMusic/pages/newMusic/newSong.vue') },
+          { path: 'newAlbum', component: () => import('@/views/Aside/findMusic/pages/newMusic/newAlbum.vue') }
         ]
       }
     ]
@@ -127,7 +105,7 @@ const routes = [
       {
         path: 'mvTopList',
         component: () => import('@/views/Aside/video/pages/mvTopList.vue')
-      },
+      }
     ]
   },
   {
@@ -210,7 +188,7 @@ const routes = [
       {
         path: 'professional',
         component: () => import('@/views/Aside/myCollect/pages/professional.vue')
-      },
+      }
     ]
   },
   {
@@ -224,13 +202,13 @@ const routes = [
   {
     path: '/VideoDetail',
     component: () => import('@/views/VideoDetail/VideoDetail.vue')
-  },
+  }
 ]
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
   routes,
   scrollBehavior() {
-    return {left: 0, y: 0}
+    return { left: 0, y: 0 }
   }
 })
 import store from '@/store'
