@@ -38,7 +38,7 @@ const routes = [
     path: '/findMusic',
     component: () => import('@/views/Aside/findMusic/index.vue'),
     children: [
-      { path: '', component: () => import('@/views/Aside/findMusic/pages/recommend.vue') },
+      { path: '', component: () => import('@/views/Aside/findMusic/pages/index.vue') },
       { path: 'exclusive', component: () => import('@/views/Aside/findMusic/pages/exclusive.vue') },
       { path: 'songMenu', component: () => import('@/views/Aside/findMusic/pages/songMenu.vue') },
       { path: 'topList', component: () => import('@/views/Aside/findMusic/pages/topList.vue') },
