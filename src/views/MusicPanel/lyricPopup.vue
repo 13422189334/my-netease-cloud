@@ -1,6 +1,6 @@
 <template>
   <section id="section">
-    <i class="el-icon-close" @click="close" />
+    <el-icon class="el-icon-close" @click="close"><Close /></el-icon>
     <header class="header-header">{{ songDetail.name }}</header>
     <main ref="dom" class="box-main">
       <nav
@@ -23,6 +23,7 @@
 <script setup>
 import { computed, nextTick, ref, watch, defineProps, defineEmits } from 'vue'
 import { useStore } from 'vuex'
+import { Close } from '@element-plus/icons-vue'
 
 /**
  * 定义父组件参数 currentTime, lyricArr
