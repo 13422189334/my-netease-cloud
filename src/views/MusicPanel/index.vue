@@ -256,6 +256,9 @@ watch(songDetail, async(newValue) => {
   lyricArr.value = formatLyric(res.data.lrc.lyric)
 }, { deep: true, immediate: true })
 
+/**
+ * 播放歌曲的事件总线
+ * */
 eventBus.on('playMusic', () => {
   setTimeout(() => {
     playMusic()

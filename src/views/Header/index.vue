@@ -1,6 +1,7 @@
 <template>
   <header>
     <el-row :gutter="20">
+      <!--  logo  -->
       <el-col :span="boolean ? 1 : 3">
         <img v-if="!boolean" class="logo" src="../../assets/image/logo-top2.png" alt="logo">
         <svg v-else class="svg" aria-hidden="true">
@@ -8,42 +9,40 @@
         </svg>
       </el-col>
       <el-col :span="6">
-        <!--  搜索弹层-->
+        <!--  搜索弹层  -->
         <el-popover
-          v-model:visible="isSearchPopup"
           placement="bottom"
           :width="320"
-          trigger="focus"
+          trigger="click"
         >
           <template #reference>
             <el-input
-              v-model.trim="value"
+              v-model.trim="keyword"
               placeholder="请输入内容"
               clearable
-              class="input-with-select"
               @keydown.enter="search"
             >
               <template #append>
-                <el-button icon="el-icon-search" @click="search" />
+                <el-button :icon="Search" @click="search" />
               </template>
             </el-input>
           </template>
-          <!-- 搜索弹出层 -->
-          <searchPopup :keyword="value" />
+          <!-- 热搜榜 - 结果 -->
+          <searchPopup :keyword="keyword" />
         </el-popover>
       </el-col>
-      <el-col class="topContent" :span="boolean ? 13 : 11" style="text-align: center;">
+      <el-col :span="boolean ? 13 : 11" class="topContent">
+        <!--  歌词  -->
         <span class="lyric">{{ lyric || $store.state.songDetail.songDetail.name }}</span>
       </el-col>
       <el-col :span="4">
         <el-dropdown v-if="profile">
-          <span class="el-dropdown-link aa" @click="userLogin">
+          <span class="el-dropdown-link" @click="userLogin">
             <el-avatar class="avatar" :size="40" :src="profile.avatarUrl"></el-avatar>
             <span class="nickname">{{profile.nickname}}</span>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>设置</el-dropdown-item>
               <el-dropdown-item @click="logout">退出</el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -70,6 +69,7 @@ import { getSearchResult } from '@/network/search.js'
 import { ref, defineAsyncComponent, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import { Search } from '@element-plus/icons-vue'
 
 const router = useRouter()
 
@@ -77,20 +77,22 @@ const searchPopup = defineAsyncComponent(() => import('./components/searchPopup.
 const login = defineAsyncComponent(() => import('./components/login.vue'))
 
 const store = useStore()
-const boolean = ref(store.state.boolean)
-const value = ref()
-const loginDialog = ref()
+const boolean = ref(store.state.boolean) // 侧边栏是否收缩
+const keyword = ref() // 搜索关键词
+const lyric = ref() // 显示的歌词
+const loginDialog = ref() // 登录弹窗
+const profile = computed(() => store.state.login.profile) // 登录状态
 
 /**
  * 接收底部音乐推送的歌词
  **/
-const lyric = ref()
 eventBus.on('sync-lyric', value => {
   lyric.value = value
 })
 
-const profile = computed(() => store.state.login.profile) // 登录状态
-
+/**
+ * 登录函数，打开登录弹窗
+ * */
 const logout = () => {
   getLogout().then(res => {
     console.log(res)
@@ -107,20 +109,29 @@ const userLogin = () => {
     loginDialog.value.dialogVisible = true
   }
 }
-// 搜索
-const isSearchPopup = ref(false)
+
+/**
+ * 搜索
+ * */
 const search = () => {
-  if (value.value) {
-    isSearchPopup.value = false
-    router.push(`/search`)
-    store.commit('setKeyword', value.value)
-    getSearchResult({ keywords: value.value, type: 1 }).then(res => {
+  if (keyword.value) {
+    store.commit('setKeyword', keyword.value)
+    getSearchResult({ keywords: keyword.value, type: 1 }).then(res => {
       store.commit('setSongMusic', res.data.result.songs)
+    }).finally(() => {
+      router.push(`/search`)
     })
+  } else {
+    router.push(`/findMusic`)
   }
 }
-eventBus.on('hotSearch', keyword => {
-  value.value = keyword
+
+/**
+ * 热搜的事件总线
+ * */
+eventBus.on('hotSearch', key => {
+  console.log(key)
+  keyword.value = key
   search()
 })
 
@@ -149,7 +160,7 @@ eventBus.on('hotSearch', keyword => {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-
+      text-align: center;
       .lyric {
         font-weight: 600;
         font-size: 30px;
