@@ -216,7 +216,7 @@ import eventBus from '@/utlis/eventbus.js'
 
 router.beforeEach(to => {
   if (!store.state.login.profile && to.path !== '/findMusic') {
-    eventBus.emit('login')
+    eventBus.emit('toLogin')
     return '/findMusic'
   }
 })

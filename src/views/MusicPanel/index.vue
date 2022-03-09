@@ -265,7 +265,7 @@ eventBus.on('playMusic', () => {
   })
 })
 
-eventBus.on('login1', () => {
+eventBus.on('login', () => {
   getLikeMusic(store.state.login.profile.userId).then((res) => {
     store.commit('setLikeMusic', res.data.ids)
     like.value = store.state.singer.likeMusic.includes(songDetail.value.id)

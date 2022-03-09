@@ -1,5 +1,5 @@
-import {phoneLogin} from "@/network/login.js";
-import {ElMessage} from 'element-plus'
+import { phoneLogin } from '@/network/login.js'
+import { ElMessage } from 'element-plus'
 
 const login = {
   state: {
@@ -11,18 +11,24 @@ const login = {
     }
   },
   actions: {
-    async login(context, payload) {
-      let res = await phoneLogin(payload)
-      if (res.data.code === 200) {
-        context.commit('setUser', res.data.profile)
-        ElMessage.success({
-          message: '登陆成功',
-          type: 'success',
-        })
-        new Promise(resolve => {
-          resolve(true)
-        })
-      }
+    login(context, payload) {
+      return new Promise(async(resolve, reject) => {
+        const res = await phoneLogin(payload)
+        if (res.data.code === 200) {
+          context.commit('setUser', res.data.profile)
+          ElMessage.success({
+            message: '登陆成功',
+            type: 'success'
+          })
+          resolve()
+        } else {
+          ElMessage.error({
+            message: '用户名或密码错误',
+            type: 'error'
+          })
+          reject()
+        }
+      })
     }
   }
 }

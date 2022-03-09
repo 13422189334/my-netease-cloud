@@ -106,6 +106,7 @@ const logout = () => {
  * */
 const userLogin = () => {
   if (!profile.value) {
+    // 修改login组件内部 defineExpose 暴露出来的dialogVisible
     loginDialog.value.dialogVisible = true
   }
 }
