@@ -1,7 +1,7 @@
 <template>
   <section>
     <header>
-      <div>搜索历史 <i class="el-icon-delete" /></div>
+      <div>搜索历史</div>
       <div class="history">
         <el-tag
           v-for="(item,index) in keywordList"

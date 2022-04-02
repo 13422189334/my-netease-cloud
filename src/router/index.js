@@ -197,7 +197,7 @@ const routes = [
   },
   {
     path: '/mySongList',
-    component: () => import('@/views/Aside/mySongList/mySongList.vue')
+    component: () => import('@/views/Aside/mySongList/index.vue')
   },
   {
     path: '/VideoDetail',
