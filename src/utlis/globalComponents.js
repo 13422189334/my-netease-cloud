@@ -8,15 +8,14 @@ import skeleton1 from '@/components/skeleton1.vue'
 import skeleton2 from '@/components/skeleton2.vue'
 import skeleton3 from '@/components/skeleton3.vue'
 
-
-export function globalComponents(app){
-	app.component('coverPicture',coverPicture)
-	app.component('cover',cover)
-	app.component('coverBox',coverBox)
-	app.component('titleTop',titleTop)
-	app.component('radio',radio)
-	app.component('searchCover',searchCover)
-	app.component('skeleton1',skeleton1)
-	app.component('skeleton2',skeleton2)
-	app.component('skeleton3',skeleton3)
+export function globalComponents(app) {
+  app.component('CoverPicture', coverPicture)
+  app.component('Cover', cover)
+  app.component('CoverBox', coverBox)
+  app.component('TitleTop', titleTop)
+  app.component('Radio', radio)
+  app.component('SearchCover', searchCover)
+  app.component('Skeleton1', skeleton1)
+  app.component('Skeleton2', skeleton2)
+  app.component('Skeleton3', skeleton3)
 }
