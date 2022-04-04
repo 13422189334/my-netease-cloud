@@ -1,12 +1,10 @@
-import {request} from "@/network/index.js";
-
+import { request } from '@/network/index.js'
 
 export function getRecommendMV() {
   return request({
     url: '/personalized/mv'
   })
 }
-
 
 export function getFM() {
   return request({

@@ -1,5 +1,4 @@
-import {request} from "@/network/index.js";
-
+import { request } from '@/network/index.js'
 
 export function getHotSearch() {
   return request({
@@ -15,7 +14,6 @@ export function getSearchSuggest(keywords) {
     }
   })
 }
-
 
 export function getSearchResult(params) {
   return request({

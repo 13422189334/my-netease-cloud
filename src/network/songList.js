@@ -1,6 +1,10 @@
-import {request} from "@/network/index.js";
+import { request } from '@/network/index.js'
 
-//精选歌单
+/**
+ * 精选歌单
+ * @param params
+ * @returns {*}
+ */
 export function getExclusiveSong(params) {
   return request({
     url: '/top/playlist/highquality',
@@ -8,14 +12,21 @@ export function getExclusiveSong(params) {
   })
 }
 
-//精选歌单列表
+/**
+ * 精选歌单列表
+ * @returns {*}
+ */
 export function getSongListTags() {
   return request({
     url: '/playlist/highquality/tags'
   })
 }
 
-//歌单详情动态
+/**
+ * 歌单详情动态
+ * @param id
+ * @returns {*}
+ */
 export function getSongListDetailDynamic(id) {
   return request({
     url: '/playlist/detail/dynamic',
@@ -25,7 +36,11 @@ export function getSongListDetailDynamic(id) {
   })
 }
 
-//歌单收藏者
+/**
+ * 歌单收藏者
+ * @param params
+ * @returns {*}
+ */
 export function getSongListCollect(params) {
   return request({
     url: '/playlist/subscribers',
@@ -33,7 +48,11 @@ export function getSongListCollect(params) {
   })
 }
 
-//全部歌单
+/**
+ * 全部歌单
+ * @param params
+ * @returns {*}
+ */
 export function getSongMenu(params) {
   return request({
     url: '/top/playlist',
@@ -41,20 +60,25 @@ export function getSongMenu(params) {
   })
 }
 
-//歌单全部分类
+/**
+ * 歌单全部分类
+ * @returns {*}
+ */
 export function getSongMenuCategory() {
   return request({
     url: '/playlist/catlist'
   })
 }
 
-//热门歌单分离
+/**
+ * 热门歌单分离
+ * @returns {*}
+ */
 export function getSongMenuHotCategory() {
   return request({
     url: '/playlist/hot'
   })
 }
-
 
 export function subscribe(id, t) {
   return request({

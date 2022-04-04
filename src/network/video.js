@@ -1,13 +1,19 @@
-import {request} from "@/network/index.js";
+import { request } from '@/network/index.js'
 
-//获取视频所有标签列表
+/**
+ * 获取视频所有标签列表
+ * @returns {*}
+ */
 export function getVideoAllTag() {
   return request({
     url: `/video/group/list`
   })
 }
 
-//获取视频热门标签分类
+/**
+ * 获取视频热门标签分类
+ * @returns {*}
+ */
 export function getVideoTags() {
   return request({
     url: `/video/category/list`
@@ -29,21 +35,32 @@ export function getVideoUrl(id) {
   })
 }
 
-//获取视频详情
+/**
+ * 获取视频详情
+ * @param id
+ * @returns {*}
+ */
 export function getVideoDetail(id) {
   return request({
     url: `/video/detail?id=${id}`
   })
 }
 
-//获取推荐视频
+/**
+ * 获取推荐视频
+ * @returns {*}
+ */
 export function getRecommendVideo() {
   return request({
     url: `/video/timeline/recommend`
   })
 }
 
-//视频标签下分类视频
+/**
+ * 视频标签下分类视频
+ * @param params
+ * @returns {*}
+ */
 export function getCategoryVideo(params) {
   return request({
     url: `/video/group`,
@@ -51,7 +68,11 @@ export function getCategoryVideo(params) {
   })
 }
 
-//获取最新MV
+/**
+ * 获取最新MV
+ * @param area
+ * @returns {*}
+ */
 export function getNewMv(area) {
   return request({
     url: `/mv/first`,
@@ -62,14 +83,20 @@ export function getNewMv(area) {
   })
 }
 
-//热播MV
+/**
+ * 热播MV
+ * @returns {*}
+ */
 export function getHotMv() {
   return request({
     url: `/personalized/mv`
   })
 }
 
-//网易出品
+/**
+ * 网易出品
+ * @returns {*}
+ */
 export function getFooterMv() {
   return request({
     url: `/mv/exclusive/rcmd`,
@@ -79,7 +106,12 @@ export function getFooterMv() {
   })
 }
 
-//MV排行
+/**
+ * MV排行
+ * @param area
+ * @param offset
+ * @returns {*}
+ */
 export function getMvTopList(area, offset) {
   return request({
     url: `/top/mv`,
@@ -91,35 +123,56 @@ export function getMvTopList(area, offset) {
   })
 }
 
-//mv详情
+/**
+ * mv详情
+ * @param id
+ * @returns {*}
+ */
 export function getMvDetail(id) {
   return request({
     url: `/mv/detail?mvid=${id}`
   })
 }
 
-//获取Mv的Url
+/**
+ * 获取Mv的Url
+ * @param id
+ * @returns {*}
+ */
 export function getMvUrl(id) {
   return request({
     url: `/mv/url?id=${id}`
   })
 }
 
-//相似MV
+/**
+ * 相似MV
+ * @param id
+ * @returns {*}
+ */
 export function getSimilarMv(id) {
   return request({
     url: `/simi/mv?mvid=${id}`
   })
 }
 
-//相关视频
+/**
+ * 相关视频
+ * @param id
+ * @returns {*}
+ */
 export function getSimilarVideo(id) {
   return request({
     url: `/related/allvideo?id=${id}`
   })
 }
 
-//mv评论
+/**
+ * mv评论
+ * @param id
+ * @param offset
+ * @returns {*}
+ */
 export function getMvComment(id, offset) {
   return request({
     url: `/comment/mv`,
@@ -131,7 +184,12 @@ export function getMvComment(id, offset) {
   })
 }
 
-//视频评论
+/**
+ * 视频评论
+ * @param id
+ * @param offset
+ * @returns {*}
+ */
 export function getVideoComment(id, offset) {
   return request({
     url: `/comment/video`,
@@ -143,7 +201,11 @@ export function getVideoComment(id, offset) {
   })
 }
 
-//全部mv
+/**
+ * 全部mv
+ * @param params
+ * @returns {*}
+ */
 export function getAllMv(params) {
   return request({
     url: `/mv/all`,

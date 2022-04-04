@@ -1,6 +1,9 @@
-import {request} from "@/network/index.js";
+import { request } from '@/network/index.js'
 
-//获取推荐电台~
+/**
+ * 获取推荐电台
+ * @returns {*}
+ */
 export function getRadio() {
   return request({
     url: '/personalized/djprogram'
@@ -13,21 +16,30 @@ export function getRecommend() {
   })
 }
 
-//获取用户电台
+/**
+ * 获取用户电台
+ * @returns {*}
+ */
 export function getUserRadio() {
   return request({
     url: '/dj/sublist'
   })
 }
 
-//电台个性推荐~
+/**
+ * 电台个性推荐
+ * @returns {*}
+ */
 export function getRadioRecommend() {
   return request({
     url: '/dj/personalize/recommend'
   })
 }
 
-//独家放送(入口列表)
+/**
+ * 独家放送(入口列表)
+ * @returns {*}
+ */
 export function getUnique() {
   return request({
     url: '/personalized/privatecontent'
@@ -44,14 +56,21 @@ export function getUniqueList(limit, offset) {
   })
 }
 
-//电台 - 分类~
+/**
+ * 电台 - 分类
+ * @returns {*}
+ */
 export function getCategory() {
   return request({
     url: '/dj/catelist'
   })
 }
 
-//电台 - 分类推荐
+/**
+ * 电台 - 分类推荐
+ * @param id
+ * @returns {*}
+ */
 export function getCategoryRadio(id) {
   return request({
     url: '/dj/recommend/type',
@@ -61,28 +80,41 @@ export function getCategoryRadio(id) {
   })
 }
 
-// 电台 - 今日优选X
+/**
+ * 电台 - 今日优选X
+ * @returns {*}
+ */
 export function getTodayRadio() {
   return request({
     url: '/dj/today/perfered'
   })
 }
 
-//电台轮播图
+/**
+ * 电台轮播图
+ * @returns {*}
+ */
 export function getBanner() {
   return request({
     url: '/dj/today/perfered'
   })
 }
 
-//电台banner
+/**
+ * 电台banner
+ * @returns {*}
+ */
 export function getDjBanner() {
   return request({
     url: '/dj/banner'
   })
 }
 
-//热门电台
+/**
+ * 热门电台
+ * @param offset
+ * @returns {*}
+ */
 export function getHotRadio(offset) {
   return request({
     url: '/dj/hot',
@@ -93,7 +125,11 @@ export function getHotRadio(offset) {
   })
 }
 
-//电台 - 付费精品
+/**
+ * 电台 - 付费精品
+ * @param offset
+ * @returns {*}
+ */
 export function getGoodRadio(offset) {
   return request({
     url: '/dj/toplist/pay',
@@ -104,28 +140,41 @@ export function getGoodRadio(offset) {
   })
 }
 
-//电台 - 类别热门电台
+/**
+ * 电台 - 类别热门电台
+ * @returns {*}
+ */
 export function getRadioHot() {
   return request({
     url: '/dj/radio/hot?cateId=2001'
   })
 }
 
-//电台 - 推荐类型
+/**
+ * 电台 - 推荐类型
+ * @returns {*}
+ */
 export function getCategoryRecommend() {
   return request({
     url: '/dj/category/recommend'
   })
 }
 
-//电台 - 非热门类型
+/**
+ * 电台 - 非热门类型
+ * @returns {*}
+ */
 export function getNotHot() {
   return request({
     url: '/dj/category/excludehot'
   })
 }
 
-//电台 - 节目详情
+/**
+ * 电台 - 节目详情
+ * @param id
+ * @returns {*}
+ */
 export function getRadioDetail(id) {
   return request({
     url: '/dj/program/detail',
@@ -135,7 +184,11 @@ export function getRadioDetail(id) {
   })
 }
 
-//电台 - 详情
+/**
+ * 电台 - 详情
+ * @param rid
+ * @returns {*}
+ */
 export function getDjDetail(rid) {
   return request({
     url: '/dj/detail',
@@ -145,7 +198,11 @@ export function getDjDetail(rid) {
   })
 }
 
-//电台 - 节目(传电台id)
+/**
+ * 电台 - 节目(传电台id)
+ * @param rid
+ * @returns {*}
+ */
 export function getProgram(rid) {
   return request({
     url: '/dj/program',
@@ -155,7 +212,10 @@ export function getProgram(rid) {
   })
 }
 
-// 电台 - 声音榜
+/**
+ * 电台 - 声音榜
+ * @returns {*}
+ */
 export function getTopList() {
   return request({
     url: '/dj/program/toplist',
@@ -166,7 +226,12 @@ export function getTopList() {
   })
 }
 
-// 电台 - 主播新人榜
+/**
+ * 电台 - 主播新人榜
+ * @param type
+ * @param offset
+ * @returns {*}
+ */
 export function getNewTopList(type, offset) {
   return request({
     url: '/dj/toplist',
@@ -177,7 +242,10 @@ export function getNewTopList(type, offset) {
   })
 }
 
-// 24 小时节目榜
+/**
+ * 24 小时节目榜
+ * @returns {*}
+ */
 export function getHoursTopList() {
   return request({
     url: '/dj/program/toplist/hours',
@@ -187,8 +255,10 @@ export function getHoursTopList() {
   })
 }
 
-
-//电台 - 最热主播榜
+/**
+ * 电台 - 最热主播榜
+ * @returns {*}
+ */
 export function getHotData() {
   return request({
     url: '/dj/toplist/popular',
@@ -197,7 +267,3 @@ export function getHotData() {
     }
   })
 }
-
-
-
-

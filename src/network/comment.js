@@ -1,7 +1,5 @@
-import {request} from "@/network/index.js";
+import { request } from '@/network/index.js'
 
-
-//评论
 export function getSongListComment(params) {
   return request({
     url: '/comment/hot',

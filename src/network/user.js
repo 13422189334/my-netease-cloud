@@ -1,6 +1,10 @@
-import {request} from "@/network/index.js";
+import { request } from '@/network/index.js'
 
-//用户歌单
+/**
+ * 用户歌单
+ * @param params
+ * @returns {*}
+ */
 export function getUserSongList(params) {
   return request({
     url: '/user/playlist',
@@ -14,7 +18,6 @@ export function getFm() {
   })
 }
 
-
 export function getPlayInfo(uid) {
   return request({
     url: `/user/record`,
@@ -24,7 +27,6 @@ export function getPlayInfo(uid) {
     }
   })
 }
-
 
 export function getFriend() {
   return request({
@@ -41,13 +43,11 @@ export function getUserProfile() {
   })
 }
 
-
 export function getMyAlbum() {
   return request({
     url: `/album/sublist`
   })
 }
-
 
 export function likeMusic(id, like) {
   return request({

@@ -1,6 +1,10 @@
-import {request} from "@/network/index.js";
+import { request } from '@/network/index.js'
 
-//歌手分类列表
+/**
+ * 歌手分类列表
+ * @param params
+ * @returns {*}
+ */
 export function getSingerCategory(params) {
   return request({
     url: '/artist/list',
@@ -8,14 +12,21 @@ export function getSingerCategory(params) {
   })
 }
 
-//热门歌手
+/**
+ * 热门歌手
+ * @returns {*}
+ */
 export function getSingerTop() {
   return request({
     url: '/top/artists'
   })
 }
 
-//歌手热门50首歌曲
+/**
+ * 歌手热门50首歌曲
+ * @param id
+ * @returns {*}
+ */
 export function getSingerSong(id) {
   return request({
     url: '/artist/top/song',
@@ -25,7 +36,12 @@ export function getSingerSong(id) {
   })
 }
 
-//歌手专辑
+/**
+ * 歌手专辑
+ * @param id
+ * @param offset
+ * @returns {*}
+ */
 export function getSingerAlbum(id, offset) {
   return request({
     url: '/artist/album',
@@ -37,7 +53,11 @@ export function getSingerAlbum(id, offset) {
   })
 }
 
-//歌手详情
+/**
+ * 歌手详情
+ * @param id
+ * @returns {*}
+ */
 export function getSingerDetail(id) {
   return request({
     url: '/artist/detail',
@@ -47,7 +67,11 @@ export function getSingerDetail(id) {
   })
 }
 
-//歌手描述
+/**
+ * 歌手描述
+ * @param id
+ * @returns {*}
+ */
 export function getSingerDesc(id) {
   return request({
     url: '/artist/desc',
@@ -57,7 +81,9 @@ export function getSingerDesc(id) {
   })
 }
 
-//相似歌手
+/*
+相似歌手
+ */
 export function getSimiSinger(id) {
   return request({
     url: '/simi/artist',
@@ -67,7 +93,11 @@ export function getSimiSinger(id) {
   })
 }
 
-//歌手MV
+/**
+ * 歌手MV
+ * @param id
+ * @returns {*}
+ */
 export function getSingerMV(id) {
   return request({
     url: '/artist/mv',
@@ -76,6 +106,3 @@ export function getSingerMV(id) {
     }
   })
 }
-
-
-

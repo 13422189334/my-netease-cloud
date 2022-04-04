@@ -1,4 +1,4 @@
-import {request} from "@/network/index.js";
+import { request } from '@/network/index.js'
 
 export function getTopList() {
   return request({
@@ -6,13 +6,11 @@ export function getTopList() {
   })
 }
 
-
 export function getMM() {
   return request({
     url: ``
   })
 }
-
 
 export function createSongList(name, privacy) {
   return request({
@@ -24,7 +22,6 @@ export function createSongList(name, privacy) {
   })
 }
 
-
 export function detailSongList(id) {
   return request({
     url: `/playlist/delete`,
@@ -35,13 +32,12 @@ export function detailSongList(id) {
   })
 }
 
-
 export function upload(id, data) {
   return request({
     url: `/playlist/cover/update`,
     method: 'POST',
     headers: {
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'multipart/form-data'
     },
     data: {
       id,

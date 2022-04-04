@@ -1,6 +1,10 @@
-import {request} from "@/network/index";
+import { request } from '@/network/index'
 
-//歌曲详情
+/**
+ * 歌曲详情
+ * @param id
+ * @returns {*}
+ */
 export function getSongDetail(id) {
   return request({
     url: `/song/detail?ids=${id}`
@@ -13,7 +17,11 @@ export function isPlay(id) {
   })
 }
 
-//最新音乐
+/**
+ * 最新音乐
+ * @param type
+ * @returns {*}
+ */
 export function getNewMusic(type) {
   return request({
     url: `/top/song`,
@@ -23,7 +31,11 @@ export function getNewMusic(type) {
   })
 }
 
-//全部新碟
+/**
+ * 全部新碟
+ * @param params
+ * @returns {*}
+ */
 export function getNewAlbum(params) {
   return request({
     url: `/album/new`,
@@ -31,7 +43,11 @@ export function getNewAlbum(params) {
   })
 }
 
-//获取喜欢音乐
+/**
+ * 获取喜欢音乐
+ * @param id
+ * @returns {*}
+ */
 export function getLikeMusic(id) {
   return request({
     url: '/likelist',
@@ -41,7 +57,11 @@ export function getLikeMusic(id) {
   })
 }
 
-//获取音乐url
+/**
+ * 获取音乐url
+ * @param id
+ * @returns {*}
+ */
 export function getUrl(id) {
   return request({
     url: '/song/url',
@@ -51,11 +71,13 @@ export function getUrl(id) {
   })
 }
 
-//获取歌词
+/**
+ * 获取歌词
+ * @param id
+ * @returns {*}
+ */
 export function getLyric(id) {
   return request({
     url: `/lyric?id=${id}`
   })
 }
-
-

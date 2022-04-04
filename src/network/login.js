@@ -1,4 +1,4 @@
-import {request} from "@/network/index.js";
+import { request } from '@/network/index.js'
 
 export function getLoginStatus() {
   return request({
@@ -14,7 +14,6 @@ export function phoneLogin(data) {
   })
 }
 
-
 export function getKey() {
   return request({
     url: '/login/qr/key',
@@ -23,7 +22,6 @@ export function getKey() {
     }
   })
 }
-
 
 export function createLogin(key) {
   return request({
@@ -34,7 +32,6 @@ export function createLogin(key) {
     }
   })
 }
-
 
 export function checkLogin(key) {
   return request({

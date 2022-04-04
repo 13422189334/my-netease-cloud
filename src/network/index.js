@@ -1,8 +1,7 @@
-import axios from "axios";
-import {path} from "@/assets/song/path.js";
-import {ElLoading} from 'element-plus'
-import {ElMessage} from 'element-plus'
-
+import axios from 'axios'
+import { path } from '@/assets/song/path.js'
+import { ElLoading } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 let timer
 let loadingInstance
@@ -37,8 +36,7 @@ export function request(config) {
       }
     }
     return config
-  }, error => {
-  })
+  }, error => console.log(error))
 
   instance.interceptors.response.use(response => {
     loadingInstance?.close()
@@ -46,16 +44,17 @@ export function request(config) {
       localStorage.clear()
       ElMessage({
         message: '请刷新重新登录',
-        type: 'error',
+        type: 'error'
       })
     }
     return response
   }, error => {
+    console.log(error)
     clearTimeout(timer)
     timer = setTimeout(() => {
       ElMessage({
         message: '网络异常请重新刷新',
-        type: 'error',
+        type: 'error'
       })
     }, 1000)
   })
