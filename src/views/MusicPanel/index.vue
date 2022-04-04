@@ -282,7 +282,7 @@ eventBus.on('login', () => {
 
   .row-audio {
     z-index: 10000000 !important;
-
+    width: 100%;
     .block-audio-title {
       position: relative;
       display: flex;
