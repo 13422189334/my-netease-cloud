@@ -98,7 +98,9 @@ const songDetail = {
     }
   },
   actions: {
-    // 歌曲id获取歌曲详情
+    /**
+     * 歌曲id获取歌曲详情
+     * */
     getSongDetailData(context, id) {
       return new Promise(resolve => {
         getSongDetail(id).then(res => {
