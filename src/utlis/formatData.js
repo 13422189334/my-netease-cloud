@@ -1,7 +1,7 @@
 export function formatData(array) {
   return array.map(item => {
     return {
-      al: {picUrl: item.program.coverUrl},
+      al: { picUrl: item.program.coverUrl },
       id: item.program.mainSong.id,
       name: item.program.name,
       dt: item.program.duration,
@@ -13,11 +13,10 @@ export function formatData(array) {
   })
 }
 
-
 export function formatNewData(array) {
   return array.map(item => {
     return {
-      al: {picUrl: item.picUrl},
+      al: { picUrl: item.picUrl },
       id: item.id,
       name: item.name,
       long: item.score,
@@ -44,7 +43,6 @@ export function formatMvData(array) {
   })
 }
 
-
 export function formatMvInfo(res) {
   return {
     photo: res.data.data.artists[0].img1v1Url,
@@ -60,8 +58,7 @@ export function formatMvInfo(res) {
   }
 }
 
-import {formatTime} from "@/utlis/formatTime.js";
-
+import { formatTime } from '@/utlis/formatTime.js'
 
 export function formatVideoInfo(res) {
   return {
@@ -77,7 +74,6 @@ export function formatVideoInfo(res) {
     desc: res.data.data.description
   }
 }
-
 
 export function formatVideoData(array) {
   return array.map(item => {
@@ -95,7 +91,6 @@ export function formatVideoData(array) {
     }
   })
 }
-
 
 export function formatSongMenuData(array) {
   return array.map((item, index) => {
@@ -117,9 +112,9 @@ export function formatSongMenuData(array) {
  */
 export function formatLyric(lyric) {
   return lyric.split(/\n/igs).map(item => {
-    let mm = item.slice(1, 3) // 分钟数
-    let ss = item.slice(4, 6) // 秒数
-    let sss = item.slice(7, 10) // 毫秒数
+    const mm = item.slice(1, 3) // 分钟数
+    const ss = item.slice(4, 6) // 秒数
+    const sss = item.slice(7, 10) // 毫秒数
     return {
       mm, ss, sss,
       lyric: item.slice(10, item.length).replace(/]/g, ''),
@@ -149,7 +144,7 @@ export function formatAlbum(data) {
 export function formatNewMusic(data) {
   return data.map(item => {
     return {
-      al: {id: item.id, picUrl: item.album.picUrl},
+      al: { id: item.id, picUrl: item.album.picUrl },
       id: item.id,
       name: item.name,
       dt: item.duration,
