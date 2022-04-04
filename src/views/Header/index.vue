@@ -155,6 +155,8 @@ eventBus.on('hotSearch', key => {
 
     .el-row {
       height: 60px;
+      display: flex;
+      align-items: center;
     }
 
     .topContent {
