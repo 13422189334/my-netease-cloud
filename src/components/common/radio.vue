@@ -1,28 +1,29 @@
 <template>
   <div class="cover">
     <div class="image-box">
-      <el-image :src="image" class="image"></el-image>
-      <div class="play-count"><i class="el-icon-caret-right"></i><span>{{$formatNumber(count)}}</span></div>
+      <el-image :src="image" class="image" />
+      <div class="play-count"><i class="el-icon-caret-right" /><span>{{ $formatNumber(count) }}</span></div>
     </div>
     <div class="title">
-     {{name}}
+      {{ name }}
     </div>
   </div>
 </template>
 
 <script setup>
+import { defineProps } from 'vue'
 defineProps({
-  image:{
-    type:String
+  image: {
+    type: String
   },
-  name:{
-    type:String
+  name: {
+    type: String
   },
-  count:{
-    type:Number
+  count: {
+    type: Number
   },
-  tag:{
-    type:String
+  tag: {
+    type: String
   }
 })
 </script>

@@ -1,24 +1,25 @@
 <template>
-<div class="cover">
-  <el-image :src="image" class="image"></el-image>
-  <div class="title" v-if="name">
-    <div>{{name}}</div>
-    <div class="time" v-if="time">{{$formatTime(time).slice(0,9)}}</div>
+  <div class="cover">
+    <el-image :src="image" class="image" />
+    <div v-if="name" class="title">
+      <div>{{ name }}</div>
+      <div v-if="time" class="time">{{ $formatTime(time).slice(0,9) }}</div>
+    </div>
+    <img class="icon" src="../../assets/image/play.png" alt="">
   </div>
-  <img class="icon" src="../../assets/image/play.png" alt="">
-</div>
 </template>
 
 <script setup>
+import { defineProps } from 'vue'
 defineProps({
-  image:{
-    type:String
+  image: {
+    type: String
   },
-  name:{
-    type:String
+  name: {
+    type: String
   },
-  time:{
-    type:Number
+  time: {
+    type: Number
   }
 })
 </script>

@@ -1,47 +1,47 @@
 <template>
-<div class="cover">
-  <i class="el-icon-user" v-if="user">{{user}}</i>
-  <div class="top" v-if="top">{{top}}</div>
-  <div class="play-count" v-if="playCount">
-    <span class="el-icon-caret-right"></span>
-    <span>{{$formatNumber(playCount)}}</span>
+  <div class="cover">
+    <i v-if="user" class="el-icon-user">{{ user }}</i>
+    <div v-if="top" class="top">{{ top }}</div>
+    <div v-if="playCount" class="play-count">
+      <span class="el-icon-caret-right" />
+      <span>{{ $formatNumber(playCount) }}</span>
+    </div>
+    <div v-if="time" class="el-icon-monitor" />
+    <div v-if="time" class="time">{{ date }}</div>
+    <img class="image" :src="image" alt="">
+    <div class="label">
+      {{ label }}
+    </div>
+    <i class="iconfont icon-bofang" />
   </div>
-  <div class="el-icon-monitor" v-if="time"></div>
-  <div class="time" v-if="time">{{date}}</div>
-  <img class="image" :src="image" alt="">
-  <div class="label">
-  {{label}}
-  </div>
-  <i class="iconfont icon-bofang"></i>
-</div>
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import { onMounted, ref, defineProps } from 'vue'
 defineProps({
-  top:{
-    type:String
+  top: {
+    type: String
   },
-  image:{
-    type:String,
-    default:''
+  image: {
+    type: String,
+    default: ''
   },
-  label:{
-    type:String
+  label: {
+    type: String
   },
-  playCount:{
-    type:Number
+  playCount: {
+    type: Number
   },
-  time:{
-    type:Boolean
+  time: {
+    type: Boolean
   },
-  user:{
-    type:String
+  user: {
+    type: String
   }
 })
 
-let date = ref()
-let formatTime = new Date(Date.now())
+const date = ref()
+const formatTime = new Date(Date.now())
 onMounted(() => {
   date.value = formatTime.getDate()
 })

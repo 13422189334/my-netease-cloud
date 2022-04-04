@@ -1,49 +1,49 @@
 <template>
   <nav class="item">
     <div class="left">
-      <el-image :src="image" class="image"></el-image>
+      <el-image :src="image" class="image" />
       <img class="icon" src="../../assets/image/play.png" alt="">
     </div>
     <div class="right">
-      <div class="title">{{title}}</div>
-      <div><el-tag size="mini" type="danger">{{tags}}</el-tag></div>
+      <div class="title">{{ title }}</div>
+      <div><el-tag size="mini" type="danger">{{ tags }}</el-tag></div>
       <div class="label">
-        <span class="label-bottom">{{label}}</span>
-        <i class="el-icon-caret-right"><span class="count">{{$formatNumber(count)}}</span></i>
-        <i class="iconfont icon-time"><span class="time">{{$formatTime(time).slice(-5)}}</span></i>
+        <span class="label-bottom">{{ label }}</span>
+        <i class="el-icon-caret-right"><span class="count">{{ $formatNumber(count) }}</span></i>
+        <i class="iconfont icon-time"><span class="time">{{ $formatTime(time).slice(-5) }}</span></i>
       </div>
     </div>
   </nav>
 </template>
 
 <script setup>
+import { defineProps } from 'vue'
 defineProps({
-  image:{
-    type:String,
-    default:'在你的身边'
+  image: {
+    type: String,
+    default: '在你的身边'
   },
-  title:{
-    type:String,
-    default:'在你的身边'
+  title: {
+    type: String,
+    default: '在你的身边'
   },
-  tags:{
-    type:String,
-    default:'在你的身边'
+  tags: {
+    type: String,
+    default: '在你的身边'
   },
-  label:{
-    type:String,
-    default:'在你的身边'
+  label: {
+    type: String,
+    default: '在你的身边'
   },
-  count:{
-    type:Number,
-    default:11111111
+  count: {
+    type: Number,
+    default: 11111111
   },
-  time:{
-    type:Number,
-    default:1123124124
-  },
+  time: {
+    type: Number,
+    default: 1123124124
+  }
 })
-
 
 </script>
 
