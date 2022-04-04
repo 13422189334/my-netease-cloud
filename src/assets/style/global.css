@@ -32,14 +32,14 @@
 }
 
 .el-header {
-  line-height: 60px;
+  /*line-height: 60px;*/
   height: 60px;
-  z-index: 1000;
+  z-index: 10000;
   position: sticky;
   top: 0;
 }
 
-.footer {
+.el-footer {
   z-index: 100000;
   position: fixed;
   left: 0;
