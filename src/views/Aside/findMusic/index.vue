@@ -31,10 +31,10 @@ const menus = ref([
 
 <style scoped lang="less">
   .nav {
-    position: fixed;
+    position: sticky;
     z-index: 1000;
     width: 100%;
-    top: 60px;
+    /*top: 60px;*/
   }
 
   .is-active {

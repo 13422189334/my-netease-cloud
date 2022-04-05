@@ -110,7 +110,7 @@ const routes = [
   },
   {
     path: '/songDetail',
-    component: () => import('@/views/SongDetail/songDetail.vue'),
+    component: () => import('@/views/SongDetail/index.vue'),
     children: [
       {
         path: '',
