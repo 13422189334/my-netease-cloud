@@ -20,7 +20,7 @@
         @click="songListDetail(item.id)"
       />
     </template>
-    <el-skeleton v-else v-for="item in songNum" :key="item" style="width: 220px;" animated>
+    <el-skeleton v-else v-for="item in (songNum + 1)" :key="item" style="width: 220px;" animated>
       <template #template>
         <el-skeleton-item variant="image" class="skeleton-pic" />
         <el-skeleton-item variant="p" class="skeleton-text" />
@@ -35,24 +35,33 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { getSongList } from '@/network/recommend.js'
-import { debounce } from '@/utlis/debounce.js'
 
 const store = useStore()
 const router = useRouter()
 
 const playList = ref() // 推荐歌单
 const songList = ref([]) // 歌单集合
-const songNum = ref(14) // 渲染歌单数量
+const songNum = ref(13) // 渲染歌单数量
+
+// const getNum = () => Math.floor(playList.value.clientWidth / 220) * 2 - 1 || 13
+const getNum = () => Math.floor((document.getElementById('main').offsetWidth - 40) / 220) * 2 - 1
 
 onMounted(() => {
-  getSongs(13)
-  window.onresize = debounce(() => {
-    getSongs(Math.floor(playList.value.clientWidth / 220) * 2 - 1)
-  }, 1000)
+  songNum.value = getNum()
+  getSongs()
+  const oldOnResize = window.onresize
+  window.onresize = async() => {
+    await oldOnResize()
+    const num = getNum()
+    if (num !== songNum.value) {
+      songNum.value = num
+      getSongs()
+    }
+  }
 })
 
-const getSongs = num => {
-  getSongList(num).then(res => {
+const getSongs = () => {
+  getSongList(songNum.value).then(res => {
     songList.value = res?.data?.result
   })
 }

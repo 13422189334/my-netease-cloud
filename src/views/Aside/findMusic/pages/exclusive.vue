@@ -49,11 +49,11 @@
         </main>
     </skeleton1>
 
-  <div @click="load" v-if="songList.length">
-    <el-affix target=".main" :offset="60">
-      <el-divider>点击加载更多</el-divider>
-    </el-affix>
-  </div>
+<!--  <div @click="load" v-if="songList.length">-->
+<!--    <el-affix target=".main" :offset="60">-->
+<!--      <el-divider>点击加载更多</el-divider>-->
+<!--    </el-affix>-->
+<!--  </div>-->
 </template>
 
 <script setup>

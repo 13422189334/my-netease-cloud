@@ -1,7 +1,7 @@
 <template>
-  <top v-if="$store.state.songDetail.isDaily" />
+  <dailyTop v-if="$store.state.songDetail.isDaily" />
   <!--    歌单顶部-->
-  <songListTop v-else />
+  <songTop v-else />
   <!--    分隔线-->
   <el-divider content-position="right">网易云音乐</el-divider>
   <!--  tabs-->
@@ -19,22 +19,23 @@
 </template>
 
 <script setup>
-import top from './children/top.vue'
-import songListTop from './children/songListTop.vue'
 import { computed, ref, watch } from 'vue'
-import { getComment } from '@/network/comment.js'
 import { useStore } from 'vuex'
+import { getComment } from '@/network/comment.js'
+
+import dailyTop from './component/dailyTop.vue'
+import songTop from './component/songTop.vue'
+
 const store = useStore()
 const id = computed(() => store.state.songDetail.commentID)
-
-const params = {
-  id: id.value,
-  type: 2,
-  limit: 0
-}
 const count = ref(0)
+
 watch(id, newID => {
-  params.id = newID
+  const params = {
+    id: newID,
+    type: 2,
+    limit: 0
+  }
   getComment(params).then(res => {
     count.value = res.data.total
   })
