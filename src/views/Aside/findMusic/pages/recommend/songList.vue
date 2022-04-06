@@ -70,7 +70,7 @@ const getSongs = () => {
  * 每日推荐歌曲
  */
 const everySong = () => {
-  store.dispatch('getEverySong')
+  store.dispatch('getDailySong')
   router.push('/songDetail')
 }
 

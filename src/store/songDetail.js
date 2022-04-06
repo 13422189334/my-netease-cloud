@@ -77,7 +77,7 @@ const songDetail = {
      * @param state
      * @param payload
      */
-    setEverySong(state, payload) {
+    setDailySong(state, payload) {
       state.isDaily = true
       state.songArray = payload.map((e, i) => ({ ...e, index: i + 1 }))
     },
@@ -139,9 +139,9 @@ const songDetail = {
      * 每日推荐歌曲
      * @param context
      */
-    getEverySong(context) {
+    getDailySong(context) {
       getRecommendSongs().then(res => {
-        context.commit('setEverySong', res.data.data.dailySongs)
+        context.commit('setDailySong', res.data.data.dailySongs)
       })
     },
     /**
