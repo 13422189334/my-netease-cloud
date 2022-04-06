@@ -1,44 +1,47 @@
 <template>
   <div style="margin-top: 60px;">
     <skeleton1 :count="4" :loading="topList.length">
-        <section class="topList">
-         <h2 style="margin-left: 10px;"> 官方榜</h2>
-          <main @click="toDetail(item.id)" class="box-card" v-for="item in topList.slice(0,4)" :key="item.id">
-            <div v-if="item.tracks.length" class="cover">
-              <img :src="item.coverImgUrl" alt="">
+      <section class="topList">
+        <h2 style="margin-left: 10px;"> 官方榜</h2>
+        <main v-for="item in topList.slice(0,4)" :key="item.id" class="box-card" @click="toDetail(item.id)">
+          <div v-if="item.tracks.length" class="cover">
+            <img :src="item.coverImgUrl" alt="">
+          </div>
+          <div class="top">
+            <div v-for="(value,index) in item.tracks" :key="index" class="top-item">
+              <span><span class="index">{{ index+1 }}</span>{{ value.first }}</span>
+              <span class="right">{{ value.second }}</span>
             </div>
-            <div class="top">
-              <div class="top-item" v-for="(value,index) in item.tracks" :key="index">
-                  <span><span class="index">{{index+1}}</span>{{value.first}}</span>
-                  <span class="right">{{value.second}}</span>
-              </div>
-            </div>
-          </main>
-          <br>
-          <el-divider content-position="left"><h2>全球榜</h2></el-divider>
-          <template v-for="item in topList.slice(4)" :key="item.id">
-            <div class="coverBottom">
-              <img class="img-topList" @click="toDetail(item.id)" :src="item.coverImgUrl" alt="">
-            </div>
-          </template>
-        </section>
-      </skeleton1>
+          </div>
+        </main>
+        <br>
+        <el-divider content-position="left"><h2>全球榜</h2></el-divider>
+        <template v-for="item in topList.slice(4)">
+          <div class="coverBottom">
+            <img class="img-topList" :src="item.coverImgUrl" alt="" @click="toDetail(item.id)">
+          </div>
+        </template>
+      </section>
+    </skeleton1>
   </div>
 </template>
 <script setup>
-import {getTopList} from '@/network/topList.js'
-import {ref} from 'vue'
-import {useRouter} from "vue-router";
-import {useStore} from 'vuex'
-
-let topList = ref([])
-getTopList().then(res => {
-  topList.value = res.data.list
-})
+import { getTopList } from '@/network/topList.js'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 const router = useRouter()
 const store = useStore()
+
+const topList = ref([])
+onMounted(() => {
+  getTopList().then(res => {
+    topList.value = res.data.list
+  })
+})
+
 const toDetail = id => {
-  store.dispatch('getSongList',id)
+  store.dispatch('getSongList', id)
   router.push('/songDetail')
 }
 </script>

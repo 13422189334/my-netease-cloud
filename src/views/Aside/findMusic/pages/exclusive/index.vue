@@ -59,11 +59,11 @@
 <script setup>
 console.log(2)
 import {useRouter} from "vue-router";
-import songListCover from '../children/songListCover.vue'
+import songListCover from '../../children/songListCover.vue'
 import {getExclusiveSong,getSongListTags} from '@/network/songList.js'
 import {onMounted,computed,reactive,ref} from "vue";
 import {useStore} from "vuex";
-import songListHeader from '../children/songListHeader.vue'
+import songListHeader from '../../children/songListHeader.vue'
 
 const store = useStore()
 const userID = computed(() => store.state.login.profile.userId)

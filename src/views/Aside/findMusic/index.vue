@@ -19,7 +19,7 @@
 import { ref } from 'vue'
 
 const menus = ref([
-  { index: '/findMusic', title: '个性推荐' },
+  { index: '/findMusic/recommend', title: '个性推荐' },
   { index: '/findMusic/exclusive', title: '专属定制' },
   { index: '/findMusic/songMenu', title: '歌单' },
   { index: '/findMusic/topList', title: '排行榜' },

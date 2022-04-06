@@ -27,7 +27,7 @@ const boolean = computed(() => store.state.boolean)
 const iconMarginRight = computed(() => store.state.boolean ? '0px' : '10px')
 
 const menus = ref([
-  { index: '/findMusic', icon: 'iconfont icon-yinle1', title: '发现音乐' },
+  { index: '/findMusic/recommend', icon: 'iconfont icon-yinle1', title: '发现音乐' },
   { index: '/podcast', icon: 'iconfont icon-faxian', title: '播客' },
   { index: '/friend', icon: 'iconfont icon-tianjiapengyou', title: '动态' },
   { index: '/FM', icon: 'iconfont icon-FM_weixuanze', title: '私人FM' },

@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/', redirect: '/findMusic'
+    path: '/', redirect: '/findMusic/recommend'
   },
   {
     path: '/search',
@@ -32,19 +32,19 @@ const routes = [
   },
   {
     path: '/unique',
-    component: () => import('@/views/Aside/findMusic/pages/unique.vue')
+    component: () => import('@/views/Aside/findMusic/pages/unique/index.vue')
   },
   {
     path: '/findMusic',
     name: '发现音乐',
     component: () => import('@/views/Aside/findMusic/index.vue'),
     children: [
-      { path: '', name: '个性推荐', component: () => import('@/views/Aside/findMusic/pages/index.vue') },
-      { path: 'exclusive', name: '专属定制', component: () => import('@/views/Aside/findMusic/pages/exclusive.vue') },
-      { path: 'songMenu', name: '歌单', component: () => import('@/views/Aside/findMusic/pages/songMenu.vue') },
-      { path: 'topList', name: '排行榜', component: () => import('@/views/Aside/findMusic/pages/topList.vue') },
-      { path: 'singer', name: '歌手', component: () => import('@/views/Aside/findMusic/pages/singer.vue') },
-      { path: 'newMusic', name: '最新音乐', component: () => import('@/views/Aside/findMusic/pages/newMusic.vue'),
+      { path: 'recommend', name: '个性推荐', component: () => import('@/views/Aside/findMusic/pages/recommend/index.vue') },
+      { path: 'exclusive', name: '专属定制', component: () => import('@/views/Aside/findMusic/pages/exclusive/index.vue') },
+      { path: 'songMenu', name: '歌单', component: () => import('@/views/Aside/findMusic/pages/songMenu/index.vue') },
+      { path: 'topList', name: '排行榜', component: () => import('@/views/Aside/findMusic/pages/topList/index.vue') },
+      { path: 'singer', name: '歌手', component: () => import('@/views/Aside/findMusic/pages/singer/index.vue') },
+      { path: 'newMusic', name: '最新音乐', component: () => import('@/views/Aside/findMusic/pages/newMusic/index.vue'),
         children: [
           { path: '', component: () => import('@/views/Aside/findMusic/pages/newMusic/newSong.vue') },
           { path: 'newAlbum', component: () => import('@/views/Aside/findMusic/pages/newMusic/newAlbum.vue') }
