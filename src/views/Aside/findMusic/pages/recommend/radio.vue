@@ -1,5 +1,5 @@
 <template>
-  <titleTop @click="$router.push('/podcast')">热门播客</titleTop>
+  <titleTop>热门播客</titleTop>
   <div ref="dom" class="radio-box">
     <coverBox
       v-for="item in radioData"
@@ -13,13 +13,13 @@
       @click="goDetail(item.id)"
     />
   </div>
-  <section v-if="!radioData.length" style="height: 320px; display: flex;justify-content: space-between;flex-wrap: wrap;">
-    <div v-for="item in 6" style="width: 50%;">
+  <section v-if="!radioData.length" class="skeleton-box">
+    <div v-for="i in 6" :class="['skeleton-box-item', i % 2 === 0 ? 'double' : '']">
       <el-skeleton animated>
         <template #template>
-          <section style="display: flex; justify-content: flex-start;">
-            <el-skeleton-item variant="image" style="width: 100px; height: 100px;" />
-            <div style="width: 70%; height: 100px; margin-left: 10px; display: flex;flex-direction: column; justify-content: space-evenly;">
+          <section class="skeleton-item">
+            <el-skeleton-item variant="image" class="img" />
+            <div class="box">
               <el-skeleton-item variant="p" />
               <el-skeleton-item variant="p" />
               <el-skeleton-item variant="p" />
@@ -29,8 +29,6 @@
       </el-skeleton>
     </div>
   </section>
-  <br>
-  <br>
 </template>
 
 <script setup>
@@ -40,14 +38,16 @@ import { getRadioRecommend } from '@/network/radio.js'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-// 播客
+
 const dom = ref('')
 const radioData = ref([])
+
 onMounted(async() => {
   await dataLazyLoading(dom)
   const res = await getRadioRecommend()
   radioData.value = res.data.data
 })
+
 const goDetail = id => {
   router.push(`/program?id=${id}`)
   window.scrollTo(0, 0)
@@ -56,8 +56,42 @@ const goDetail = id => {
 
 <style scoped lang="less">
 .radio-box{
+  height: 360px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+.skeleton-box {
+  height: 360px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &-item {
+    width: 49%;
+  }
+
+  .double {
+    margin-left: 20px;
+  }
+
+  .skeleton-item {
+    display: flex;
+    justify-content: flex-start;
+    .img {
+      width: 100px;
+      height: 100px;
+    }
+    .box {
+      width: 70%;
+      height: 100px;
+      margin-left: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+  }
+}
+
 </style>
