@@ -1,34 +1,36 @@
 <template>
-  <titleTop>热门播客</titleTop>
-  <div ref="dom" class="radio-box">
-    <coverBox
-      v-for="item in radioData"
-      :image="item.picUrl"
-      :tags="item.category"
-      :label="item.dj.nickname"
-      :time="item.createTime"
-      :key="item.id"
-      :count="item.subCount"
-      :title="item.name"
-      @click="goDetail(item.id)"
-    />
-  </div>
-  <section v-if="!radioData.length" class="skeleton-box">
-    <div v-for="i in 6" :class="['skeleton-box-item', i % 2 === 0 ? 'double' : '']">
-      <el-skeleton animated>
-        <template #template>
-          <section class="skeleton-item">
-            <el-skeleton-item variant="image" class="img" />
-            <div class="box">
-              <el-skeleton-item variant="p" />
-              <el-skeleton-item variant="p" />
-              <el-skeleton-item variant="p" />
-            </div>
-          </section>
-        </template>
-      </el-skeleton>
+  <titleTop @click="toPodcast">热门播客</titleTop>
+  <div ref="dom" >
+    <section v-if="!radioData.length" class="skeleton-box">
+      <div v-for="i in 6" :class="['skeleton-box-item', i % 2 === 0 ? 'double' : '']">
+        <el-skeleton animated>
+          <template #template>
+            <section class="skeleton-item">
+              <el-skeleton-item variant="image" class="img" />
+              <div class="box">
+                <el-skeleton-item variant="p" />
+                <el-skeleton-item variant="p" />
+                <el-skeleton-item variant="p" />
+              </div>
+            </section>
+          </template>
+        </el-skeleton>
+      </div>
+    </section>
+    <div v-else class="radio-box">
+      <coverBox
+        v-for="item in radioData"
+        :image="item.picUrl"
+        :tags="item.category"
+        :label="item.dj.nickname"
+        :time="item.createTime"
+        :key="item.id"
+        :count="item.subCount"
+        :title="item.name"
+        @click="goDetail(item.id)"
+      />
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>
@@ -43,13 +45,18 @@ const dom = ref('')
 const radioData = ref([])
 
 onMounted(async() => {
-  await dataLazyLoading(dom)
   const res = await getRadioRecommend()
   radioData.value = res.data.data
+  await dataLazyLoading(dom)
 })
 
 const goDetail = id => {
   router.push(`/program?id=${id}`)
+  window.scrollTo(0, 0)
+}
+
+const toPodcast = () => {
+  router.push('/podcast')
   window.scrollTo(0, 0)
 }
 </script>

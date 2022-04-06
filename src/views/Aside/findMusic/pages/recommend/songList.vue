@@ -1,5 +1,5 @@
 <template>
-  <titleTop>推荐歌单</titleTop>
+  <titleTop @click="goSongMenu">推荐歌单</titleTop>
   <section ref="playList" class="section">
     <cover-picture
       v-if="songList.length"
@@ -64,6 +64,10 @@ const getSongs = () => {
   getSongList(songNum.value).then(res => {
     songList.value = res?.data?.result
   })
+}
+
+const goSongMenu = () => {
+  router.push('/findMusic/songMenu')
 }
 
 /**

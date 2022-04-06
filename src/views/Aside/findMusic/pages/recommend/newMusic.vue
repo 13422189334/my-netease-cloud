@@ -17,7 +17,7 @@
           <nav class="item" @dblclick="playMusic(item)" v-for="item in newMusicData" :key="item.id">
             <div class="left" @click="playMusic(item)">
               <el-image :src="item.album.picUrl" class="image"></el-image>
-              <img class="icon" src="../../../../assets/image/play.png" alt="">
+              <img class="icon" src="../../../../../assets/image/play.png" alt="">
             </div>
             <div class="right">
               <div class="title">{{item.name}}</div>

@@ -12,7 +12,7 @@ import { defineAsyncComponent } from 'vue'
 import banner from './banner.vue'
 import songList from './songList.vue'
 const radio = defineAsyncComponent(() => import('./radio.vue'))
-const unique = defineAsyncComponent(() => import('../../children/unique.vue'))
-const newMusic = defineAsyncComponent(() => import('../../children/newMusic.vue'))
-const recommendMV = defineAsyncComponent(() => import('../../children/recommendMV.vue'))
+const unique = defineAsyncComponent(() => import('./unique.vue'))
+const newMusic = defineAsyncComponent(() => import('./newMusic.vue'))
+const recommendMV = defineAsyncComponent(() => import('./recommendMV.vue'))
 </script>
