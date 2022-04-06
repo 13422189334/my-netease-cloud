@@ -36,15 +36,15 @@ const routes = [
   },
   {
     path: '/findMusic',
+    name: '发现音乐',
     component: () => import('@/views/Aside/findMusic/index.vue'),
     children: [
-      { path: '', component: () => import('@/views/Aside/findMusic/pages/index.vue') },
-      { path: 'exclusive', component: () => import('@/views/Aside/findMusic/pages/exclusive.vue') },
-      { path: 'songMenu', component: () => import('@/views/Aside/findMusic/pages/songMenu.vue') },
-      { path: 'topList', component: () => import('@/views/Aside/findMusic/pages/topList.vue') },
-      { path: 'singer', component: () => import('@/views/Aside/findMusic/pages/singer.vue') },
-      { path: 'newMusic',
-        component: () => import('@/views/Aside/findMusic/pages/newMusic.vue'),
+      { path: '', name: '个性推荐', component: () => import('@/views/Aside/findMusic/pages/index.vue') },
+      { path: 'exclusive', name: '专属定制', component: () => import('@/views/Aside/findMusic/pages/exclusive.vue') },
+      { path: 'songMenu', name: '歌单', component: () => import('@/views/Aside/findMusic/pages/songMenu.vue') },
+      { path: 'topList', name: '排行榜', component: () => import('@/views/Aside/findMusic/pages/topList.vue') },
+      { path: 'singer', name: '歌手', component: () => import('@/views/Aside/findMusic/pages/singer.vue') },
+      { path: 'newMusic', name: '最新音乐', component: () => import('@/views/Aside/findMusic/pages/newMusic.vue'),
         children: [
           { path: '', component: () => import('@/views/Aside/findMusic/pages/newMusic/newSong.vue') },
           { path: 'newAlbum', component: () => import('@/views/Aside/findMusic/pages/newMusic/newAlbum.vue') }
