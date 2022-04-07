@@ -18,7 +18,6 @@
       </template>
     </el-skeleton>
   </div>
-  <br>
 </template>
 
 <script setup>
@@ -46,7 +45,7 @@ const toUnique = () => {
 
 <style scoped lang="less">
 .skeleton {
-  height: 215px;
+  height: 200px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -63,8 +62,8 @@ const toUnique = () => {
 }
 .box{
   width: 100%;
-  margin-bottom: -30px;
-  height: 215px;
+  /*margin-bottom: -30px;*/
+  height: 200px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
