@@ -4,7 +4,7 @@
     <el-skeleton :loading="!Boolean(unique.length)" animated class="skeleton" :count="3">
       <template #template>
         <div class="item">
-          <el-skeleton-item variant="image" class="image" />
+          <el-skeleton-item variant="image" class="img" />
           <el-skeleton-item variant="p" class="p" />
         </div>
       </template>
