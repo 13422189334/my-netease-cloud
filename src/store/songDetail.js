@@ -47,8 +47,13 @@ const songDetail = {
     removeKeyword(state, index) {
       state.keywordList.splice(index, 1)
     },
-    setSongDetail(stata, payload) {
-      stata.songDetail = payload
+    /**
+     * 歌曲详情
+     * @param stata
+     * @param payload
+     */
+    setSongDetail(state, payload) {
+      state.songDetail = payload
     },
     /**
      * 歌单列表
