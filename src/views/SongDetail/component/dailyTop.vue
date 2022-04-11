@@ -10,37 +10,20 @@
     </div>
   </div>
   <div class="button-group">
-    <el-button type="danger" round :icon="CaretRight" @click="playAll">
-      播放全部
-    </el-button>
-    <el-button disabled round :icon="FolderAdd" @click="like">
-      收藏全部
-    </el-button>
+    <el-button type="danger" round :icon="CaretRight" @click="playAll">播放全部</el-button>
+    <el-button disabled round :icon="FolderAdd" @click="like">收藏全部</el-button>
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
 import eventbus from '@/utlis/eventbus.js'
-import { debounce } from '@/utlis/debounce.js'
 import { throttle } from '@/utlis/throttle.js'
-import { useStore } from 'vuex'
 import { CaretRight, FolderAdd } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
 
 const date = ref()
 onMounted(() => {
   date.value = new Date(Date.now()).getDate()
-})
-
-const store = useStore()
-const like = debounce(() => {
-  store.state.songDetail.commentID
-  ElMessage({
-    message: '收藏成功!',
-    center: true,
-    type: 'success'
-  })
 })
 
 const playAll = throttle(() => {

@@ -12,8 +12,8 @@
           <span style="margin-left: 10px;">{{ $formatTime(songList.createTime) }} 创建</span>
         </div>
         <div class="C">
-          <el-button size="medium" type="danger"  round :icon="CaretRight" @click="playAll">播放全部</el-button>
-          <el-button size="medium" disabled round :icon="FolderAdd" @click="like">收藏全部({{ $formatNumber(songListData?.bookedCount) || '888' }})</el-button>
+          <el-button size="medium" type="danger" round :icon="CaretRight" @click="playAll">播放全部</el-button>
+          <el-button size="medium" disabled round :icon="FolderAdd">收藏全部({{ $formatNumber(songListData?.bookedCount) || '888' }})</el-button>
           <el-button size="medium" disabled round :icon="Share">分享({{ songListData?.shareCount || '999' }})</el-button>
           <el-button size="medium" disabled round :icon="Upload">VIP下载</el-button>
         </div>
@@ -33,26 +33,15 @@
 </template>
 
 <script setup>
-import { computed, watch, ref } from 'vue'
+import { computed } from 'vue'
 import { CaretRight, FolderAdd, Upload, Share } from '@element-plus/icons-vue'
 import { useStore } from 'vuex'
-import { ElMessage } from 'element-plus'
 import eventbus from '@/utlis/eventbus.js'
-import { debounce } from '@/utlis/debounce.js'
 import { throttle } from '@/utlis/throttle.js'
 
 const store = useStore()
 const songList = computed(() => store.state.songDetail.songList)
 const songListData = computed(() => store.state.songDetail.commentData)
-
-const like = debounce(() => {
-  store.state.songDetail.commentID
-  ElMessage({
-    message: '收藏成功!',
-    center: true,
-    type: 'success'
-  })
-})
 
 const playAll = throttle(() => {
   eventbus.emit('playAll')
