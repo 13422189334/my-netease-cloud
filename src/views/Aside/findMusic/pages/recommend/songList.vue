@@ -1,5 +1,5 @@
 <template>
-  <titleTop @click="goSongMenu">推荐歌单</titleTop>
+  <titleTop @click="toSongMenu">推荐歌单</titleTop>
   <section ref="playList" class="section">
     <cover-picture
       v-if="songList.length"
@@ -7,7 +7,7 @@
       :time="true"
       top="根据你的音乐口味生成每日更新"
       label="每日歌曲推荐"
-      @click="everySong"
+      @click="toDailySong"
     />
 
     <template v-if="songList.length">
@@ -17,7 +17,7 @@
         :play-count="item.playCount"
         :image="item.picUrl"
         :label="item.name"
-        @click="songListDetail(item.id)"
+        @click="toSongListDetail(item.id)"
       />
     </template>
     <el-skeleton v-else v-for="item in (songNum + 1)" :key="item" style="width: 220px;" animated>
@@ -66,23 +66,24 @@ const getSongs = () => {
   })
 }
 
-const goSongMenu = () => {
+const toSongMenu = () => {
   router.push('/findMusic/songMenu')
 }
 
 /**
  * 每日推荐歌曲
  */
-const everySong = () => {
-  store.dispatch('getDailySong')
-  router.push('/songDetail')
+const toDailySong = () => {
+  store.dispatch('getDailySong').then(() => {
+    router.push('/songDetail')
+  })
 }
 
 /**
  * 点击歌单跳转
  * @param id
  */
-const songListDetail = id => {
+const toSongListDetail = id => {
   store.dispatch('getSongList', id)
   router.push('/songDetail')
 }

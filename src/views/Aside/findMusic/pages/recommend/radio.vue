@@ -27,7 +27,7 @@
         :key="item.id"
         :count="item.subCount"
         :title="item.name"
-        @click="goDetail(item.id)"
+        @click="toDetail(item.id)"
       />
     </div>
   </div>
@@ -50,7 +50,7 @@ onMounted(async() => {
   await dataLazyLoading(dom)
 })
 
-const goDetail = id => {
+const toDetail = id => {
   router.push(`/program?id=${id}`)
   window.scrollTo(0, 0)
 }

@@ -61,7 +61,6 @@ const songDetail = {
      * @param payload
      */
     setSongArray(state, payload) {
-      state.isDaily = false
       state.songList = {
         ...payload,
         boolean: true
@@ -83,7 +82,6 @@ const songDetail = {
      * @param payload
      */
     setDailySong(state, payload) {
-      state.isDaily = true
       state.songArray = payload.map((e, i) => ({ ...e, index: i + 1 }))
     },
     /**
@@ -143,10 +141,15 @@ const songDetail = {
     /**
      * 每日推荐歌曲
      * @param context
+     * @returns {Promise<unknown>}
      */
     getDailySong(context) {
-      getRecommendSongs().then(res => {
-        context.commit('setDailySong', res.data.data.dailySongs)
+      context.commit('setIsDaily', true)
+      return new Promise((resolve, reject) => {
+        getRecommendSongs().then(res => {
+          context.commit('setDailySong', res.data.data.dailySongs)
+          resolve(true)
+        })
       })
     },
     /**
@@ -157,6 +160,7 @@ const songDetail = {
     async getSongList(context, id) {
       context.commit('setID', id)
       context.commit('setHeader')
+      context.commit('setIsDaily', false)
       getSongListDetailDynamic(id).then(res => {
         context.commit('setDynamic', res.data)
       })

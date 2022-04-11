@@ -10,7 +10,7 @@
       </template>
       <template #default>
         <div class="box">
-          <div v-for="item in unique" :key="item.id" class="cover" @click="toDetail(item.id)">
+          <div v-for="item in unique" :key="item.id" class="cover" @click="toMvDetail(item.id)">
             <el-image :src="item.picUrl" class="image" />
             <div class="name">{{ item.name }}</div>
           </div>
@@ -35,7 +35,7 @@ onMounted(async() => {
   unique.value = res.data.result
 })
 
-const toDetail = id => {
+const toMvDetail = id => {
   router.push('/videoDetail?id=' + id)
 }
 const toUnique = () => {
