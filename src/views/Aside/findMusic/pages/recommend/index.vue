@@ -9,10 +9,10 @@
 
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import banner from './banner.vue'
-import songList from './songList.vue'
-const radio = defineAsyncComponent(() => import('./radio.vue'))
-const unique = defineAsyncComponent(() => import('./unique.vue'))
-const newMusic = defineAsyncComponent(() => import('./newMusic.vue'))
-const recommendMV = defineAsyncComponent(() => import('./recommendMV.vue'))
+import banner from './components/banner.vue'
+import songList from './components/songList.vue'
+const radio = defineAsyncComponent(() => import('./components/radio.vue'))
+const unique = defineAsyncComponent(() => import('./components/unique.vue'))
+const newMusic = defineAsyncComponent(() => import('./components/newMusic.vue'))
+const recommendMV = defineAsyncComponent(() => import('./components/recommendMV.vue'))
 </script>
