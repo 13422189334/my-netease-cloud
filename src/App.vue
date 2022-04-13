@@ -60,7 +60,10 @@ onUnmounted(() => {
 <style scoped lang="less">
   @import "./assets/style/global.css";
 
- &:deep (.el-main) {
+  .el-header {
+    z-index: 10000;
+  }
+  .el-main {
     padding: 0px 20px 0px 20px !important;
   }
 </style>
