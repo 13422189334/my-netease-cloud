@@ -54,28 +54,14 @@ const routes = [
   },
   {
     path: '/podcast',
+    redirect: '/podcast/radioCenter',
     component: () => import('@/views/Aside/podcast/index.vue'),
     children: [
-      {
-        path: '',
-        component: () => import('@/views/Aside/podcast/pages/podcastContent.vue')
-      },
-      {
-        path: 'programTop',
-        component: () => import('@/views/Aside/podcast/pages/programTop.vue')
-      },
-      {
-        path: 'newComer',
-        component: () => import('@/views/Aside/podcast/pages/newComer.vue')
-      },
-      {
-        path: 'hotTopList',
-        component: () => import('@/views/Aside/podcast/pages/hotTopList.vue')
-      },
-      {
-        path: 'hoursTopList',
-        component: () => import('@/views/Aside/podcast/pages/hoursTopList.vue')
-      }
+      { path: 'radioCenter', component: () => import('@/views/Aside/podcast/pages/radioCenter/index.vue') },
+      { path: 'programTop', component: () => import('@/views/Aside/podcast/pages/programTop.vue') },
+      { path: 'newComer', component: () => import('@/views/Aside/podcast/pages/newComer.vue') },
+      { path: 'hotTopList', component: () => import('@/views/Aside/podcast/pages/hotTopList.vue') },
+      { path: 'hoursTopList', component: () => import('@/views/Aside/podcast/pages/hoursTopList.vue') }
     ]
   },
   {
