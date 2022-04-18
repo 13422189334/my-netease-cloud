@@ -17,6 +17,7 @@ module.exports = {
     es6: true
   },
   rules: {
+    'vue/no-multiple-template-root': 'off',
     'vue/max-attributes-per-line': [2, {
       singleline: 10,
       multiline: {
