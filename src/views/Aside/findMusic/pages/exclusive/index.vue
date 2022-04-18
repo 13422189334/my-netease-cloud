@@ -7,9 +7,9 @@
     <span>精品歌单</span>
     <!--  弹出框-->
     <el-popover
-      v-model:visible="isShow"
       placement="bottom"
       :width="530"
+      trigger="hover"
     >
       <template #reference>
         <el-button
@@ -17,12 +17,9 @@
           round
           size="small"
           :icon="ColdDrink"
-          @blur="clickPopover"
-          @mouseenter="clickPopover(true)"
-          @click="clickPopover"
         >{{ tagTitle }}</el-button>
       </template>
-      <p class="all" :class="{active:current === -1}" style="padding: 0 40px;" @click="select(undefined,-1)">全部歌单</p>
+      <p class="all" :class="{ top: true, active:current === -1}" @click="select(undefined,-1)">全部歌单</p>
       <el-divider />
       <ul class="tags">
         <li
@@ -67,7 +64,6 @@
       </section>
     </main>
   </skeleton1>
-
   <div v-if="songList.length" @click="load">
     <el-affix target=".main" :offset="60">
       <el-divider>点击加载更多</el-divider>
@@ -78,7 +74,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { onMounted, computed, reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { CaretRight, ColdDrink } from '@element-plus/icons-vue'
 import songCard from './components/songCard.vue'
 import { getExclusiveSong, getSongListTags } from '@/network/songList.js'
@@ -120,10 +116,6 @@ const getSongList = (boolean) => {
   })
 }
 
-const clickPopover = (bool) => {
-  isShow.value = bool || !isShow.value
-}
-
 /**
  * 获取标签
  */
@@ -159,7 +151,6 @@ const toSongListDetail = id => {
     color: red;
     font-weight: 900 !important;
   }
-
   .title {
     padding: 20px 0;
     width: 100%;
@@ -170,6 +161,14 @@ const toSongListDetail = id => {
     span {
       font-weight: 900;
       font-size: 20px;
+    }
+
+    .top {
+      padding: 0 40px;
+    }
+
+    .tag:hover {
+      cursor: pointer;
     }
   }
 
