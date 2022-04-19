@@ -1,7 +1,7 @@
 <template>
-  <el-skeleton :loading="!Boolean(banners.length)" :count="3" :animated="true" style="display: flex;justify-content: space-between;">
+  <el-skeleton :loading="!Boolean(banners.length)" :count="3" :animated="true" class="box">
     <template #template>
-      <el-skeleton-item variant="image" style="width: 32%; height: 150px;" />
+      <el-skeleton-item variant="image" class="banner" />
     </template>
     <template #default>
       <div class="box">
@@ -30,11 +30,11 @@ onMounted(() => {
 <style scoped lang="less">
 .box{
   display: flex;
-  height: 150px;
   justify-content: space-between;
   .banner {
     width: 32%;
     border-radius: 10px;
+    height: 150px;
   }
 }
 </style>
