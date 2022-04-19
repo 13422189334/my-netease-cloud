@@ -31,6 +31,7 @@ onMounted(() => {
 .box{
   display: flex;
   justify-content: space-between;
+  height: 180px;
   .banner {
     width: 32%;
     border-radius: 10px;
