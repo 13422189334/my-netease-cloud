@@ -1,7 +1,7 @@
 <template>
-  <el-skeleton :loading="!Boolean(loading)" :count="count" :animated="true" style="display: flex;justify-content: space-between;flex-wrap: wrap;">
+  <el-skeleton :loading="!Boolean(loading)" :count="count" :animated="true" class="skeleton">
     <template #template>
-      <div style="margin-top: 10px;">
+      <div class="skeleton-item">
         <el-skeleton-item variant="image" :style="size" />
         <el-skeleton-item variant="p" :style="{width:size.width}" style="margin: 10px 0;" />
         <br>
@@ -16,8 +16,7 @@
 
 <script setup>
 import { defineProps } from 'vue'
-// eslint-disable-next-line no-unused-vars
-const props = defineProps({
+defineProps({
   count: {
     type: Number,
     default: 1
@@ -28,10 +27,10 @@ const props = defineProps({
   },
   size: {
     type: Object,
-    default: {
+    default: () => ({
       width: '180px',
       height: '180px'
-    }
+    })
   },
   show: {
     type: Boolean,
@@ -41,5 +40,13 @@ const props = defineProps({
 </script>
 
 <style scoped lang="less">
+.skeleton {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 
+  &-item {
+    margin-top: 10px;
+  }
+}
 </style>
