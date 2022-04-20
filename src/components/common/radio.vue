@@ -2,7 +2,10 @@
   <div class="cover">
     <div class="image-box">
       <el-image :src="image" class="image" />
-      <div class="play-count"><i class="el-icon-caret-right" /><span>{{ $formatNumber(count) }}</span></div>
+      <div class="play-count">
+        <el-icon><CaretRight/></el-icon>
+        <span>{{ $formatNumber(count) }}</span>
+      </div>
     </div>
     <div class="title">
       {{ name }}
@@ -12,6 +15,8 @@
 
 <script setup>
 import { defineProps } from 'vue'
+import { CaretRight } from '@element-plus/icons-vue'
+
 defineProps({
   image: {
     type: String
