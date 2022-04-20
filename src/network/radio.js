@@ -134,7 +134,7 @@ export function getGoodRadio(offset) {
   return request({
     url: '/dj/toplist/pay',
     params: {
-      limit: 12,
+      limit: 6,
       offset
     }
   })
