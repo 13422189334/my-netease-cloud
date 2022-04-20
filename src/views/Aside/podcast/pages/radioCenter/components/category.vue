@@ -1,18 +1,18 @@
 <template>
-  <el-card shadow="always" style="height: 170px;">
+  <el-card shadow="always" class="category-card">
     <template #header>
       <span>分类列表</span>
     </template>
     <el-skeleton :loading="!Boolean(category.length)" :count="18" :animated="true" class="category">
       <template #template>
         <div class="item">
-          <el-skeleton-item variant="image" style="width: 50px; height: 50px;" />
-          <el-skeleton-item variant="p" style="width: 50px; margin-top: 5px;" />
+          <el-skeleton-item variant="image" class="skeleton-image" />
+          <el-skeleton-item variant="p" class="skeleton-p" />
         </div>
       </template>
       <template #default>
         <div class="category">
-          <div v-for="item in category" :key="item.id" class="item" @click="goCategoryList(item.id,item.name)">
+          <div v-for="item in category" :key="item.id" class="item" @click="toCategoryList(item.id,item.name)">
             <el-image :src="item.pic56x56Url" />
             <div class="tags">{{ item.name }}</div>
           </div>
@@ -36,12 +36,15 @@ onMounted(async() => {
   category.value = res.data.categories
 })
 const router = useRouter()
-const goCategoryList = (id, name) => {
+const toCategoryList = (id, name) => {
   router.push(`/categoryList?id=${id}&name=${name}`)
 }
 </script>
 
 <style scoped lang="less">
+  .category-card {
+    height: 170px;
+  }
   .category{
     display: flex;
     justify-content: space-between;
@@ -50,10 +53,16 @@ const goCategoryList = (id, name) => {
     .tags {
       font-size: 12px;
       color: silver;
+      cursor: pointer;
     }
-    .item{
+    .item, .skeleton-image {
       width: 50px;
       height: 50px;
+      cursor: pointer;
+    }
+    .skeleton-p {
+      width: 50px;
+      margin-top: 5px;
     }
   }
 </style>
