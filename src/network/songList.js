@@ -71,7 +71,7 @@ export function getSongMenuCategory() {
 }
 
 /**
- * 热门歌单分离
+ * 热门歌单分类
  * @returns {*}
  */
 export function getSongMenuHotCategory() {

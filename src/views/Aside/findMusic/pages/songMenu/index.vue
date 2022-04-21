@@ -1,213 +1,282 @@
 <template>
-  <header>
-    <div>
-      <el-popover
-          v-model:visible="isShow"
-          placement="bottom-start"
-          :width="650"
-          trigger="click">
-        <template #reference>
-          <el-button type="success" size="small" round>
-            {{title}}
-            <i class="el-icon-arrow-right el-icon--right"></i>
-          </el-button>
-        </template>
-        <strong style="margin-left: 10px;"
-                :class="{active:title === '全部歌单'}"
-                @click="changeTag('全部歌单')">
+  <div class="top">
+    <el-popover
+      placement="bottom-start"
+      :width="650"
+      trigger="hover"
+    >
+      <template #reference>
+        <el-button type="success" size="small" round>
+          {{ tagName }}<el-icon><ArrowRight/></el-icon>
+        </el-button>
+      </template>
+      <section>
+        <strong
+          style="margin-left: 10px;"
+          :class="{active: tagName === '全部歌单'}"
+          @click="changeTag('全部歌单')"
+        >
           全部歌单
         </strong>
-        <el-divider></el-divider>
-          <nav v-if="tags[0].length">
-            <main v-for="(item,index) in tags" :key="index">
-              <div class="left">
-                <i :class="item[0].icon"></i>
-                <span>{{item[0].label}}</span>
+        <el-divider />
+        <section class="all-tags">
+          <section class="tags-box" v-for="(item,index) in allTags" :key="index">
+            <div class="left">
+              <i :class="item.icon" />
+              <span>{{ item.label }}</span>
+            </div>
+            <div class="right">
+              <div
+                v-for="(v,i) in item.list"
+                :key="i"
+                :class="{active:tagName === v.name}"
+                class="tag"
+                @click="changeTag(v.name)"
+              >
+                {{ v.name }}
+                <span v-if="v.is" class="hot">hot</span>
               </div>
-              <div class="right">
-                  <div :class="{active:title === v.name}" @click="changeTag(v.name)" v-for="(v,i) in item" :key="i" class="tag">
-                    {{v.name}}<span style="font-size: 10px;color: red;" v-if="v.is">hot</span>
-                  </div>
-              </div>
-            </main>
-          </nav>
-      </el-popover>
+            </div>
+          </section>
+        </section>
+      </section>
+    </el-popover>
+    <div class="hot-tags">
+      <span
+        v-for="item in hotTags"
+        :key="item.id"
+        class="hot-tags-item"
+        @click="changeTag(item.name)"
+      >
+        {{ item.name }}
+      </span>
     </div>
-    <div><span v-for="item in hotTags" :key="item.id" @click="changeTag(item.name)">{{item.name}}</span></div>
-  </header>
+  </div>
   <section>
-    <template v-if="songMenu.length" class="cover">
-      <coverPicture
-          v-for="item in songMenu" :key="item.id"
-          @click="toDetail(item.id)"
-          :label="item.name"
-          :user="item.creator.nickname"
-          :playCount="item.playCount"
-          :image="item.coverImgUrl">
-      </coverPicture>
-    </template>
-    
-    <template v-else class="cover">
-      <el-skeleton v-for="item in 15" style="width: 220px; margin-top: 10px;">
-        <template #template>
-          <el-skeleton-item variant="image" style="width: 220px; height: 220px;" />
-          <div style="margin-top: 10px;">
-            <el-skeleton-item variant="h1"/>
-            <el-skeleton-item variant="h1"/>
+    <el-skeleton :loading="!Boolean(songList.length)" :count="1">
+      <template #template>
+        <div class="center">
+          <div v-for="item in 15" :key="item" class="skeleton-item cover">
+            <el-skeleton-item variant="image" class="image" />
+            <div class="cover">
+              <el-skeleton-item variant="h1" />
+              <el-skeleton-item variant="h1" />
+            </div>
           </div>
-        </template>
-      </el-skeleton>
-    </template>
+        </div>
+      </template>
+      <template #default>
+        <div class="center">
+          <coverPicture
+            v-for="item in songList"
+            :key="item.id"
+            :label="item.name"
+            :user="item.creator.nickname"
+            :play-count="item.playCount"
+            :image="item.coverImgUrl"
+            @click="toDetail(item.id)"
+          />
+        </div>
+      </template>
+    </el-skeleton>
   </section>
-  <br>
-  <footer>
-    <el-pagination @current-change="change"
-                   background layout="prev, pager, next"
-                   :total="1300">
-    </el-pagination>
-  </footer>
+  <div class="footer-pagination">
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="songTotal"
+      @current-change="change"
+    />
+  </div>
 </template>
 
 <script setup>
-import {getSongMenu,getSongMenuCategory,getSongMenuHotCategory} from '@/network/songList.js'
-import {ref} from 'vue'
-import {useRouter} from "vue-router";
-import {useStore} from "vuex";
-//热门分类
-let hotTags = ref([])
-getSongMenuHotCategory().then(res => {
-  hotTags.value = res.data.tags
-})
-
-// 全部分类
-let isShow = ref(false)
-let title = ref('全部歌单')
-let tags = ref([[],[],[],[],[]])
-getSongMenuCategory().then(res => {
-   res.data.sub.forEach(item => {
-      if (item.category === 0){
-        tags.value[0].push({name:item.name,is:item.hot,icon:'iconfont icon-wangluo',label:'语种'})
-      }else if (item.category === 1){
-        tags.value[1].push({name:item.name,is:item.hot,icon:'iconfont icon-fengge',label:'风格'})
-      }else if (item.category === 2){
-        tags.value[2].push({name:item.name,is:item.hot,icon:'iconfont icon-kafei',label:'场景'})
-      }else if (item.category === 3){
-        tags.value[3].push({name:item.name,is:item.hot,icon:'iconfont icon-iconweixiao',label:'情感'})
-      }else {
-        tags.value[4].push({name:item.name,is:item.hot,icon:'iconfont icon-fenlei',label:'主题'})
-      }
-   })
-})
-const changeTag = tag => {
-  title.value = tag
-  params.cat = tag
-  isShow.value = false
-  getSongMenu(params).then(res => {
-    let {playlists} = res.data
-    songMenu.value = playlists
-  })
-}
-//歌单列表
-let params = {
-  order:'hot',
-  cat:'全部',
-  limit:15,
-  offset:0
-}
-let songMenu = ref([])
-let count = ref()
-getSongMenu(params).then(res => {
-  let {playlists,total} = res.data
-  songMenu.value = playlists
-  count.value = total
-})
-const change = value => {
-  params.offset = value
-  getSongMenu(params).then(res => {
-    let {playlists} = res.data
-    songMenu.value = playlists
-  })
-}
+import { getSongMenu, getSongMenuCategory, getSongMenuHotCategory } from '@/network/songList.js'
+import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { ArrowRight } from '@element-plus/icons-vue'
 const router = useRouter()
 const store = useStore()
+
+const hotTags = ref([]) // 热门分类
+const tagName = ref('全部歌单') // 选中的分类
+const songList = ref([])
+const songTotal = ref()
+const params = reactive({
+  order: 'hot',
+  cat: '全部歌单',
+  limit: 15,
+  offset: 0
+})
+
+const allTags = reactive([
+  { icon: 'iconfont icon-wangluo', label: '语种', list: [] },
+  { icon: 'iconfont icon-fengge', label: '风格', list: [] },
+  { icon: 'iconfont icon-kafei', label: '场景', list: [] },
+  { icon: 'iconfont icon-iconweixiao', label: '情感', list: [] },
+  { icon: 'iconfont icon-fenlei', label: '主题', list: [] }
+])
+
+onMounted(() => {
+  // 获取热门分类
+  getSongMenuHotCategory().then(res => {
+    hotTags.value = res.data.tags
+  })
+
+  // 获取所有分类
+  getSongMenuCategory().then(res => {
+    res.data.sub.forEach(item => {
+      if (item.category === 0) {
+        allTags[0].list.push({ name: item.name, is: item.hot })
+      } else if (item.category === 1) {
+        allTags[1].list.push({ name: item.name, is: item.hot })
+      } else if (item.category === 2) {
+        allTags[2].list.push({ name: item.name, is: item.hot })
+      } else if (item.category === 3) {
+        allTags[3].list.push({ name: item.name, is: item.hot })
+      } else {
+        allTags[4].list.push({ name: item.name, is: item.hot })
+      }
+    })
+  })
+
+  // 获取歌曲
+  getSongs()
+})
+
+const getSongs = () => {
+  getSongMenu(params).then(res => {
+    const { playlists, total } = res.data
+    songList.value = playlists
+    songTotal.value = total
+  })
+}
+
+const changeTag = tag => {
+  tagName.value = tag
+  params.cat = tag
+  getSongs()
+}
+
+const change = value => {
+  params.offset = value
+  getSongs()
+}
+
 const toDetail = id => {
-  store.dispatch('getSongList',id)
+  store.dispatch('getSongList', id)
   router.push('/songDetail')
 }
 </script>
 
 <style scoped lang="less">
-.active{
-  font-weight: 900;
-  color: red!important;
-  transition: all 1s;
-}
-nav{
-  width: 100%;
-  main{
+  .active {
+    font-weight: 900;
+    color: red !important;
+    transition: all 1s;
+  }
+
+  .el-divider--horizontal {
+    margin: 12px 0 24px 0;
+  }
+
+  .all-tags {
     width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 10px;
-    .left{
-      width: 20%;
-      height: 100%;
+
+    .tags-box {
+      width: 100%;
       display: flex;
       justify-content: flex-start;
-      align-items: center;
-      margin-top: -10px;
-      span{
-        margin-left: 10px;
+      margin-top: 10px;
+
+      .left {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: -10px;
+
+        span {
+          margin-left: 10px;
+        }
       }
-    }
-    .right{
-      width: 80%;
-      height: 100%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
-      .tag{
-        width: 16.6%;
-        height: 50px;
-        color: rgb(101, 97, 97);
-        &:hover{
-          color: red;
-          transition: all 1s;
-          font-weight: 600;
+
+      .right {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .tag {
+          width: 16.6%;
+          height: 50px;
+          color: rgb(101, 97, 97);
+
+          &:hover {
+            color: red;
+            transition: all 1s;
+            font-weight: 600;
+            cursor: pointer;
+          }
+
+          .hot {
+            font-size: 10px;
+            color: red;
+          }
         }
       }
     }
   }
-}
-header{
-  margin: 60px 0 20px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  div{
-    width: 60%;
+
+  .top {
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
-    span{
-      color: #656161;
-      &:hover{
-        color: pink;
-        transform: scale(1.1);
-        transition: all 1s;
+    align-items: center;
+
+    .hot-tags {
+      width: 60%;
+      display: flex;
+      justify-content: space-between;
+
+      &-item {
+        color: #656161;
+
+        &:hover {
+          cursor: pointer;
+          color: pink;
+          transform: scale(1.1);
+          transition: all 1s;
+        }
       }
     }
   }
-}
-section{
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-  .cover{
-    margin-top: 15px;
+
+  .center {
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    .cover {
+      margin-top: 15px;
+    }
+
+    .skeleton-item {
+      width: 220px;
+
+      .image {
+        width: 220px;
+        height: 220px;
+      }
+    }
   }
-}
-footer{
-  display: flex;
-  justify-content: center;
-}
+
+  .footer-pagination {
+    display: flex;
+    justify-content: center;
+  }
 </style>
