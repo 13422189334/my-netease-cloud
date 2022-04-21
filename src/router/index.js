@@ -54,14 +54,15 @@ const routes = [
   },
   {
     path: '/podcast',
+    name: '播客',
     redirect: '/podcast/radioCenter',
     component: () => import('@/views/Aside/podcast/index.vue'),
     children: [
-      { path: 'radioCenter', component: () => import('@/views/Aside/podcast/pages/radioCenter/index.vue') },
-      { path: 'programTop', component: () => import('@/views/Aside/podcast/pages/programTop.vue') },
-      { path: 'newComer', component: () => import('@/views/Aside/podcast/pages/newComer.vue') },
-      { path: 'hotTopList', component: () => import('@/views/Aside/podcast/pages/hotTopList.vue') },
-      { path: 'hoursTopList', component: () => import('@/views/Aside/podcast/pages/hoursTopList.vue') }
+      { path: 'radioCenter', name: '电台中心', component: () => import('@/views/Aside/podcast/pages/radioCenter/index.vue') },
+      { path: 'voiceRank', name: '声音榜', component: () => import('@/views/Aside/podcast/pages/voiceRank/index.vue') },
+      { path: 'freshRank', name: '新晋播客榜', component: () => import('@/views/Aside/podcast/pages/freshRank/index.vue') },
+      { path: 'hotRank', name: '热门播客榜', component: () => import('@/views/Aside/podcast/pages/hotRank/index.vue') },
+      { path: 'hourRank', name: '24小时节目榜', component: () => import('@/views/Aside/podcast/pages/hourRank/index.vue') }
     ]
   },
   {
