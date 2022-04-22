@@ -44,10 +44,14 @@ const routes = [
       { path: 'songMenu', name: '歌单', component: () => import('@/views/Aside/findMusic/pages/songMenu/index.vue') },
       { path: 'leaderboard', name: '排行榜', component: () => import('@/views/Aside/findMusic/pages/leaderboard/index.vue') },
       { path: 'singer', name: '歌手', component: () => import('@/views/Aside/findMusic/pages/singer/index.vue') },
-      { path: 'newMusic', name: '最新音乐', component: () => import('@/views/Aside/findMusic/pages/newMusic/index.vue'),
+      {
+        path: 'newMusic',
+        name: '最新音乐',
+        component: () => import('@/views/Aside/findMusic/pages/newMusic/index.vue'),
+        redirect: '/findMusic/newMusic/song',
         children: [
-          { path: '', component: () => import('@/views/Aside/findMusic/pages/newMusic/newSong.vue') },
-          { path: 'newAlbum', component: () => import('@/views/Aside/findMusic/pages/newMusic/newAlbum.vue') }
+          { path: 'song', component: () => import('@/views/Aside/findMusic/pages/newMusic/pages/song/index.vue') },
+          { path: 'disc', component: () => import('@/views/Aside/findMusic/pages/newMusic/pages/disc/index.vue') }
         ]
       }
     ]
