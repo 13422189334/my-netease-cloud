@@ -42,7 +42,7 @@ const routes = [
       { path: 'recommend', name: '个性推荐', component: () => import('@/views/Aside/findMusic/pages/recommend/index.vue') },
       { path: 'exclusive', name: '专属定制', component: () => import('@/views/Aside/findMusic/pages/exclusive/index.vue') },
       { path: 'songMenu', name: '歌单', component: () => import('@/views/Aside/findMusic/pages/songMenu/index.vue') },
-      { path: 'topList', name: '排行榜', component: () => import('@/views/Aside/findMusic/pages/topList/index.vue') },
+      { path: 'leaderboard', name: '排行榜', component: () => import('@/views/Aside/findMusic/pages/leaderboard/index.vue') },
       { path: 'singer', name: '歌手', component: () => import('@/views/Aside/findMusic/pages/singer/index.vue') },
       { path: 'newMusic', name: '最新音乐', component: () => import('@/views/Aside/findMusic/pages/newMusic/index.vue'),
         children: [
