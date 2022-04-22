@@ -1,5 +1,5 @@
 <template>
-  <skeleton1 :count="4" :loading="topList.length">
+  <skeleton1 :count="4" :loading="topList.length" :margin="{ width: '95%', marginLeft: '5px' }">
     <section class="section">
       <h2>官方榜</h2>
       <main v-for="item in topList.slice(0,4)" :key="item.id" class="box-card" @click="toDetail(item.id)">
