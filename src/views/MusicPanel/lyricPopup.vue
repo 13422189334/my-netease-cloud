@@ -101,6 +101,7 @@ const scrollPlay = (scrollTime) => {
 <style scoped lang="less">
 
   #section {
+    z-index: 10000;
     width: 100%;
     height: 100%;
     background: #D9AFD9 linear-gradient(0deg, #d9afd9 0%, #97D9E1 100%);

@@ -61,7 +61,10 @@ onUnmounted(() => {
   @import "./assets/style/global.css";
 
   .el-header {
-    z-index: 10000;
+    z-index: 1000;
+  }
+  .el-container {
+    z-index: 999;
   }
   .el-main {
     padding: 0px 20px 0px 20px !important;
