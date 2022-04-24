@@ -1,19 +1,13 @@
 <template>
   <header>
-    <nav class="nav">
-      <router-link to="/findMusic/newMusic/song" v-slot="{scope}">
-        <el-button class="button" round size="small" :class="{active:$route.path === '/findMusic/newMusic/song'}">新歌速递
+    <section class="section">
+      <router-link v-for="(menu, mIndex) in menus" :key="mIndex" :to="menu.url">
+        <el-button type="text" class="button" round :class="{ active: path === menu.url }">
+          {{ menu.name }}
         </el-button>
       </router-link>
-      <router-link to="/findMusic/newMusic/disc">
-        <el-button class="button" round size="small" :class="{active:$route.path === '/findMusic/newMusic/disc'}">
-          新碟上架
-        </el-button>
-      </router-link>
-    </nav>
+    </section>
   </header>
-  <br>
-  <br>
   <router-view v-slot="{Component}">
     <keep-alive>
       <component :is="Component"></component>
@@ -22,12 +16,21 @@
 </template>
 
 <script setup>
+import { reactive, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
+const menus = reactive([
+  { url: '/findMusic/newMusic/song', name: '新歌速递' },
+  { url: '/findMusic/newMusic/disc', name: '新碟上架' }
+])
+
+const route = useRoute()
+const path = computed(() => route.path)
 </script>
 
 <style scoped lang="less">
   .active {
-    background: silver;
+    background: #a0cfff;
     color: whitesmoke;
   }
 
@@ -36,13 +39,17 @@
     display: flex;
     justify-content: center;
 
-    .nav {
+    .section {
       border-radius: 20px;
-      border: 1px solid #ededed;
+      border: 1px solid #a0cfff;
 
       .button {
+        height: 30px;
         width: 150px;
       }
     }
+  }
+  a {
+    text-decoration: none !important;
   }
 </style>
