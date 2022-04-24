@@ -13,9 +13,9 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, onMounted } from 'vue'
 
-const current = ref('全部')
+const current = ref()
 const tabs = ref([
   { name: '全部', area: 'ALL', type: 0 },
   { name: '华语', area: 'ZH', type: 7 },
@@ -29,6 +29,11 @@ const change = value => {
   current.value = value.name
   emit('change', value)
 }
+
+onMounted(() => {
+  change(tabs.value[0])
+})
+
 </script>
 
 <style scoped lang="less">
