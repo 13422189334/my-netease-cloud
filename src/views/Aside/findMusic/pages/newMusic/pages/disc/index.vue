@@ -1,7 +1,19 @@
 <template>
   <navTabs @change="change" />
-  <section>
-    <skeleton2 :count="10" :loading="newAlbum.length" :size="{width:'200px',height:'200px'}" :show="false">
+  <el-skeleton
+    :count="1"
+    :loading="!Boolean(newAlbum.length)"
+    :animated="true"
+  >
+    <template #template>
+      <div class="section">
+        <div v-for="item in 10" :key="item" class="item">
+          <el-skeleton-item variant="image" class="skeleton-image" />
+          <el-skeleton-item variant="p" class="skeleton-p" />
+        </div>
+      </div>
+    </template>
+    <template #default>
       <section class="section">
         <cover
           v-for="item in newAlbum"
@@ -11,78 +23,93 @@
           @click="play(item)"
         />
       </section>
-    </skeleton2>
-    <br>
-    <div style="display: flex;justify-content: center;">
-      <el-pagination
-        background
-        :page-sizes="[10, 20, 30, 40]"
-        :page-size="10"
-        layout="sizes, prev, pager, next, jumper"
-        :total="400"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      />
-    </div>
-  </section>
+    </template>
+  </el-skeleton>
+  <div class="pagination">
+    <el-pagination
+      background
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="10"
+      layout="sizes, prev, pager, next, jumper"
+      :total="400"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
+  </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
 import navTabs from '../../components/navTabs.vue'
+import { ref, reactive } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import { getNewAlbum } from '@/network/song.js'
 import { getAlbumContent } from '@/network/comment.js'
-import { onMounted, ref } from 'vue'
 import { formatAlbum } from '@/utlis/formatData.js'
-import { useStore } from 'vuex'
 
-const params = {
+const params = reactive({
   limit: 10,
   area: 'ALL',
   offset: 0
-}
-const newAlbum = ref([])
-onMounted(async() => {
-  const res = await getNewAlbum(params)
-  newAlbum.value = res?.data.albums
 })
+const newAlbum = ref([])
+
 const router = useRouter()
 const store = useStore()
+
 const play = item => {
   store.commit('setHeader')
   getAlbumContent(item.id).then(res => {
     store.commit('setSongList', formatAlbum(res.data.album))
     store.commit('setSongMusic', res.data.songs)
+    router.push('/songDetail')
   })
-  router.push('/songDetail')
+}
+
+const getAlbum = () => {
+  getNewAlbum(params).then(res => {
+    newAlbum.value = res?.data.albums
+  })
 }
 
 const change = item => {
-  newAlbum.value.length = 0
   params.area = item.area
-  getNewAlbum(params).then(res => {
-    newAlbum.value = res.data.albums
-  })
+  getAlbum()
 }
+
 const handleSizeChange = value => {
   params.limit = value
-  getNewAlbum(params).then(res => {
-    newAlbum.value = res.data.albums
-  })
+  getAlbum()
 }
+
 const handleCurrentChange = value => {
-  newAlbum.value.length = 0
   params.offset = value
-  getNewAlbum(params).then(res => {
-    newAlbum.value = res.data.albums
-  })
+  getAlbum()
 }
+
 </script>
 
 <style scoped lang="less">
-.section{
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-}
+  .section {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .item {
+    height: 260px;
+    .skeleton-image {
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+    }
+    .skeleton-p {
+      width: 200px;
+      margin-top: 5px;
+    }
+  }
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
 </style>
