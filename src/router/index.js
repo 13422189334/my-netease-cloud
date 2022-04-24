@@ -75,6 +75,16 @@ const routes = [
     component: () => import('@/views/Aside/friend/index.vue')
   },
   {
+    path: '/fm',
+    name: 'FM',
+    component: () => import('@/views/Aside/fm/index.vue')
+  },
+  {
+    path: '/recentPlay',
+    name: '最近播放',
+    component: () => import('@/views/Aside/recentPlay/index.vue')
+  },
+  {
     path: '/program',
     component: () => import('@/views/RadioDetailed/program.vue')
   },
@@ -149,15 +159,7 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/fm',
-    name: 'FM',
-    component: () => import('@/views/Aside/fm/index.vue')
-  },
-  {
-    path: '/RecentPlay',
-    component: () => import('@/views/Aside/RecentPlay/RecentPlay.vue')
-  },
+
   {
     path: '/myPodcast',
     component: () => import('@/views/Aside/myPodcast/myPodcast.vue')
