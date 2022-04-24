@@ -150,8 +150,9 @@ const routes = [
     ]
   },
   {
-    path: '/FM',
-    component: () => import('@/views/Aside/Fm/FM.vue')
+    path: '/fm',
+    name: 'FM',
+    component: () => import('@/views/Aside/fm/index.vue')
   },
   {
     path: '/RecentPlay',
