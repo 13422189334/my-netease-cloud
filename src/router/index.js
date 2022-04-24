@@ -70,6 +70,11 @@ const routes = [
     ]
   },
   {
+    path: '/friend',
+    name: '动态',
+    component: () => import('@/views/Aside/friend/index.vue')
+  },
+  {
     path: '/program',
     component: () => import('@/views/RadioDetailed/program.vue')
   },
@@ -143,10 +148,6 @@ const routes = [
         component: () => import('@/views/SingerContent/pages/similaritySinger.vue')
       }
     ]
-  },
-  {
-    path: '/friend',
-    component: () => import('@/views/Aside/friend/friend.vue')
   },
   {
     path: '/FM',
