@@ -50,8 +50,8 @@ const routes = [
         component: () => import('@/views/Aside/findMusic/pages/newMusic/index.vue'),
         redirect: '/findMusic/newMusic/song',
         children: [
-          { path: 'song', component: () => import('@/views/Aside/findMusic/pages/newMusic/pages/song/index.vue') },
-          { path: 'disc', component: () => import('@/views/Aside/findMusic/pages/newMusic/pages/disc/index.vue') }
+          { path: 'song', name: '新歌速递', component: () => import('@/views/Aside/findMusic/pages/newMusic/pages/song/index.vue') },
+          { path: 'disc', name: '新碟上架', component: () => import('@/views/Aside/findMusic/pages/newMusic/pages/disc/index.vue') }
         ]
       }
     ]
