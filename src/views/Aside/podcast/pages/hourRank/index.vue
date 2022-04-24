@@ -13,7 +13,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import topList from '../components/topList.vue'
+import topList from '../../components/topList.vue'
 import { getHoursTopList } from '@/network/radio.js'
 import { formatData } from '@/utlis/formatData.js'
 import eventbus from '@/utlis/eventbus.js'

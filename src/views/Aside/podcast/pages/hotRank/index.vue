@@ -12,7 +12,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import topList from '../components/topList.vue'
+import topList from '../../components/topList.vue'
 import { getNewTopList } from '@/network/radio.js'
 import { formatNewData } from '@/utlis/formatData.js'
 import { ref, onMounted } from 'vue'
