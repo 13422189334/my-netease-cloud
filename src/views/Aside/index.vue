@@ -34,7 +34,7 @@ const menus = ref([
   { index: '/RecentPlay', icon: 'iconfont icon-time', title: '最近播放' },
   { index: '/myPodcast', icon: 'iconfont icon-tuijian', title: '我的播客' },
   { index: '/myCollect', icon: 'iconfont icon-shoucang', title: '我的收藏' },
-  { index: '/likeMusic', icon: 'iconfont icon-aixin', title: '我喜欢的音乐' },
+  { index: '/myLike', icon: 'iconfont icon-aixin', title: '我喜欢的音乐' },
   { index: '/mySongList', icon: 'iconfont icon-gedan', title: '我的歌单' }
 ])
 
