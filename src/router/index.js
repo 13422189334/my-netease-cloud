@@ -85,6 +85,22 @@ const routes = [
     component: () => import('@/views/Aside/recentPlay/index.vue')
   },
   {
+    path: '/myPodcast',
+    name: '我的播客',
+    component: () => import('@/views/Aside/myPodcast/index.vue')
+  },
+  {
+    path: '/myCollect',
+    name: '我的收藏',
+    redirect: '/myCollect/album',
+    component: () => import('@/views/Aside/myCollect/index.vue'),
+    children: [
+      { path: 'album', name: '专辑', component: () => import('@/views/Aside/myCollect/pages/album/index.vue') },
+      { path: 'singer', name: '歌手', component: () => import('@/views/Aside/myCollect/pages/singer/index.vue') },
+      { path: 'video', name: '视频', component: () => import('@/views/Aside/myCollect/pages/video/index.vue') }
+    ]
+  },
+  {
     path: '/program',
     component: () => import('@/views/RadioDetailed/program.vue')
   },
@@ -156,34 +172,6 @@ const routes = [
       {
         path: 'similaritySinger',
         component: () => import('@/views/SingerContent/pages/similaritySinger.vue')
-      }
-    ]
-  },
-
-  {
-    path: '/myPodcast',
-    name: '我的播客',
-    component: () => import('@/views/Aside/myPodcast/index.vue')
-  },
-  {
-    path: '/myCollect',
-    component: () => import('@/views/Aside/myCollect/MyCollect.vue'),
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/Aside/myCollect/pages/album.vue')
-      },
-      {
-        path: 'singer',
-        component: () => import('@/views/Aside/myCollect/pages/singer.vue')
-      },
-      {
-        path: 'video',
-        component: () => import('@/views/Aside/myCollect/pages/video.vue')
-      },
-      {
-        path: 'professional',
-        component: () => import('@/views/Aside/myCollect/pages/professional.vue')
       }
     ]
   },
