@@ -101,6 +101,11 @@ const routes = [
     ]
   },
   {
+    path: '/myLike',
+    name: '我喜欢的音乐',
+    component: () => import('@/views/Aside/myLike/index.vue')
+  },
+  {
     path: '/program',
     component: () => import('@/views/RadioDetailed/program.vue')
   },
@@ -175,10 +180,7 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/likeMusic',
-    component: () => import('@/views/Aside/likeMusic/likeMusic.vue')
-  },
+
   {
     path: '/mySongList',
     component: () => import('@/views/Aside/mySongList/index.vue')
