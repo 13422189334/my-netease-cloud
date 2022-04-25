@@ -3,7 +3,7 @@
     <i v-if="user" class="el-icon-user">{{ user }}</i>
     <div v-if="top" class="top">{{ top }}</div>
     <div v-if="playCount" class="play-count">
-      <span class="el-icon-caret-right" />
+      <span><el-icon><CaretRight/></el-icon></span>
       <span>{{ $formatNumber(playCount) }}</span>
     </div>
     <div v-if="time" class="el-icon-monitor" />
@@ -18,6 +18,7 @@
 
 <script setup>
 import { onMounted, ref, defineProps } from 'vue'
+import { CaretRight } from '@element-plus/icons-vue'
 defineProps({
   top: {
     type: String

@@ -2,7 +2,7 @@
   <nav class="item">
     <div class="left">
       <el-image :src="image" class="image" />
-      <img class="icon" src="../../assets/image/play.png" alt="">
+      <img class="icon" src="@/assets/image/play.png" alt="">
     </div>
     <div class="right">
       <div class="title">{{ title }}</div>

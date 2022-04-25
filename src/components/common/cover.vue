@@ -5,7 +5,7 @@
       <div>{{ name }}</div>
       <div v-if="time" class="time">{{ $formatTime(time).slice(0,9) }}</div>
     </div>
-    <img class="icon" src="../../assets/image/play.png" alt="">
+    <img class="icon" src="@/assets/image/play.png" alt="">
   </div>
 </template>
 
