@@ -67,7 +67,7 @@ const toDetail = id => {
    }
    .skeleton-item-p {
      margin-left: 20px;
-     width: 90%;
+     width: 80%;
    }
  }
 </style>
