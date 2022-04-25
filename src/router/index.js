@@ -162,7 +162,8 @@ const routes = [
 
   {
     path: '/myPodcast',
-    component: () => import('@/views/Aside/myPodcast/myPodcast.vue')
+    name: '我的播客',
+    component: () => import('@/views/Aside/myPodcast/index.vue')
   },
   {
     path: '/myCollect',
