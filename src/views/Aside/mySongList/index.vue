@@ -1,7 +1,9 @@
 <template>
   <skeleton :loading="profile?.avatarUrl.length">
-    <header>
-      <div><el-image class="cover" :src="profile?.avatarUrl" alt="img" /></div>
+    <div class="info-box">
+      <div>
+        <el-image class="cover" :src="profile?.avatarUrl" alt="img" />
+      </div>
       <div class="content">
         <div class="A">
           <el-tag type="danger" size="mini">歌单</el-tag>
@@ -11,75 +13,104 @@
           <el-link type="info">{{ profile?.nickname }}</el-link>
         </div>
         <div class="C">
-          <el-button size="medium" type="danger" round :icon="Edit" @click="createSongList">新建歌单</el-button>
-          <el-button v-if="!canDel" size="medium" round :icon="SetUp" @click="setup">管理歌单</el-button>
-          <el-button v-else size="medium" round :icon="SetUp" @click="setup">取消管理</el-button>
-          <el-button :disabled="isDisabled" size="medium" round :icon="Delete" @click="detail">删除歌单</el-button>
-          <el-button :disabled="true" size="medium" round :icon="Share">分享歌单</el-button>
+          <el-button
+            v-for="(menu, mIndex) in menus"
+            :key="mIndex"
+            size="medium"
+            :type="menu.type"
+            round
+            :icon="menu.icon"
+            :disabled="menu.disabled"
+            @click="menu.handle"
+          >
+            {{ menu.name }}
+          </el-button>
         </div>
       </div>
-    </header>
+    </div>
   </skeleton>
   <el-divider><h2>我的歌单列表</h2></el-divider>
-  <el-checkbox v-model="checkAll">全选</el-checkbox>
-  <br>
-  <footer>
-    <div v-for="item in mySongMenu" :key="item.id" class="box">
-      <el-checkbox v-model="item.checkbox" />
-      <el-image :src="item.coverImgUrl" class="image-cover" @click="toDetail(item)"/>
+  <el-checkbox v-if="canDel" v-model="checkAll">全选</el-checkbox>
+  <div class="song-box">
+    <div v-for="item in songArray" :key="item.id" class="box">
+      <el-image :src="item.coverImgUrl" class="image-cover" @click="toDetail(item)" />
       <div class="label">{{ item.name }}</div>
+      <el-checkbox v-if="canDel" v-model="item.checkbox" />
     </div>
-  </footer>
+  </div>
   <!--  对话框-->
-  <myDialog ref="dialog" @create="create" />
+  <myDialog ref="dialog" @create="getUserSongs" />
 </template>
 
 <script setup>
-
-import { ElMessage, ElMessageBox } from 'element-plus'
+import myDialog from './components/myDialog.vue'
 import { computed, ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { Edit, Delete, Share, SetUp } from '@element-plus/icons-vue'
 import { detailSongList } from '@/network/topList.js'
 import { getUserSongList } from '@/network/user.js'
-import myDialog from './components/myDialog.vue'
-import { Edit, Delete, Share, SetUp } from '@element-plus/icons-vue'
 
 const store = useStore()
 const router = useRouter()
 const profile = computed(() => store.state.login.profile) // 个人信息
-const mySongMenu = ref([]) // 歌单
+const songArray = ref([]) // 歌单
+
+/**
+ * 按钮组，控制按钮显示隐藏及可操作性
+ * */
+const menus = computed(() => {
+  const hasCheck = songArray.value.some(item => item?.checkbox === true)
+  return [
+    { type: 'danger', disabled: false, icon: Edit, handle: () => openCreatedDialog(), name: '新建歌单' },
+    !canDel.value && { type: 'default', disabled: false, icon: SetUp, handle: () => setup(), name: '管理歌单' },
+    canDel.value && { type: 'default', disabled: false, icon: SetUp, handle: () => setup(), name: '取消管理' },
+    canDel.value && { type: 'default', disabled: !hasCheck, icon: Delete, handle: () => del(), name: '删除歌单' },
+    {
+      type: 'default', disabled: true, icon: Share, handle: () => {
+      }, name: '分享歌单'
+    }
+  ].filter(Boolean)
+})
 
 /**
  * 查询用户歌单
  * */
-onMounted(() => {
+const getUserSongs = () => {
   const params = {
     uid: profile.value.userId,
     timestamp: Date.now()
   }
   getUserSongList(params).then(res => {
     const playList = res.data.playlist || []
-    mySongMenu.value = playList.map(e => ({ ...e, checkbox: false }))
+    songArray.value = playList.map(e => ({ ...e, checkbox: false }))
   })
+}
+
+onMounted(() => {
+  getUserSongs()
 })
 
-
+/**
+ * 跳转详情
+ * */
 const toDetail = item => {
-  if (item.name === '我喜欢的音乐') {
-    router.push('/likeMusic')
+  if (item.name === profile.value.nickname + '喜欢的音乐') {
+    router.push('/myLike')
   } else {
     store.dispatch('getSongList', item.id)
     router.push('/songDetail')
   }
 }
-// 新建歌单
+
+/**
+ * 新建歌单
+ * */
 const dialog = ref()
-const createSongList = () => {
+const openCreatedDialog = () => {
   dialog.value.isShow = true
 }
-
-
 
 /**
  * 管理歌单，开启 删除歌单 等相关操作
@@ -89,117 +120,118 @@ const setup = () => {
   canDel.value = !canDel.value
 }
 
-const isDisabled = computed(() => mySongMenu.value.every(item => !item?.checkbox)) // 是否有选中的歌单可以用于删除
-
-// 删除歌单
-// const isShow = ref(false)
 const checkAll = computed({
-  get() {
-    return mySongMenu.value.length && mySongMenu.value.every(item => item?.checkbox)
-  },
-  set(newValue) {
-    mySongMenu.value.forEach(item => item.checkbox = newValue)
+  get: () => songArray.value.length && songArray.value.every(item => item?.checkbox), // 是否有选中的歌单可以用于删除
+  set: (newValue) => {
+    songArray.value = songArray.value.map(item => ({ ...item, checkbox: newValue }))
   }
 })
 
-const is = ref(false)
-const detail = () => {
-  ElMessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+const del = () => {
+  ElMessageBox.confirm('此操作将永久删除该歌单, 是否继续?', '提示', {
     confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'
   }).then(() => {
     const arr = []
-    mySongMenu.value.forEach(item => {
+    songArray.value.forEach(item => {
       if (item?.checkbox) {
         arr.push(item.id)
-        console.log(item.id)
       }
     })
     detailSongList(arr.join(',')).then(res => {
       if (res.data.code === 200) {
-        ElMessage({
-          type: 'success', message: '删除成功!'
-        })
-        create()
+        ElMessage({ type: 'success', message: '删除成功!' })
+        getUserSongs()
+        setup()
       }
     })
   }).catch(() => {
-    ElMessage({
-      type: 'info', message: '已取消删除'
-    })
+    ElMessage({ type: 'info', message: '已取消删除' })
   })
 }
 </script>
 
 <style scoped lang="less">
-footer{
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  .box{
-    width:  18%;
-    height: 320px;
-    text-align: center;
-    margin: 10px;
-    .image-cover{
-      width: 100%;
-      height: 220px;
-      border-radius: 10px;
-      &:hover{
-        transition: all 1s;
-        transform: translate3d(0,-5px,0);
-        box-shadow: 1px 1px 20px;
-      }
-    }
-    .label{
-      width: 100%;
-      height: 30px;
-      text-align: center;
-      margin-top: 5px;
-    }
-  }
-}
+  .song-box {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 
-header{
-  display: flex;
-  justify-content: flex-start;
-  padding: 10px;
-  width: 100%;
-  .cover{
-    display: block;
-    height: 150px;
-    width: 150px;
-    border-radius: 10px;
-    .info{
-      margin-left: 5px;
-    }
-  }
-  .content{
-    margin-left: 20px;
-    .A{
-      width: 100%;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      h2{
-        display: inline;
-        margin-left: 10px;
+    .box {
+      width: 18%;
+      height: 320px;
+      text-align: center;
+      margin: 10px;
+
+      .image-cover {
+        width: 100%;
+        height: 220px;
+        border-radius: 10px;
+
+        &:hover {
+          transition: all 1s;
+          transform: translate3d(0, -5px, 0);
+          box-shadow: 1px 1px 20px;
+        }
       }
-    }
-    .B{
-      width: 100%;
-      height: 50px;
-      display: flex;
-      margin: 10px 0;
-      align-items: center;
-      span{
-        font-size: 14px;
-        color: #748aad;
-      }
-      a{
-        margin: 0 7px;
-        text-decoration:none
+
+      .label {
+        width: 100%;
+        height: 30px;
+        text-align: center;
+        margin-top: 5px;
       }
     }
   }
-}
+
+  .info-box {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+    width: 100%;
+
+    .cover {
+      display: block;
+      height: 150px;
+      width: 150px;
+      border-radius: 10px;
+
+      .info {
+        margin-left: 5px;
+      }
+    }
+
+    .content {
+      margin-left: 20px;
+
+      .A {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+
+        h2 {
+          display: inline;
+          margin-left: 10px;
+        }
+      }
+
+      .B {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        margin: 10px 0;
+        align-items: center;
+
+        span {
+          font-size: 14px;
+          color: #748aad;
+        }
+
+        a {
+          margin: 0 7px;
+          text-decoration: none
+        }
+      }
+    }
+  }
 </style>
