@@ -64,43 +64,50 @@ onMounted(async() => {
 </script>
 
 <style scoped lang="less">
-header{
-  display: flex;
-  justify-content: flex-start;
-  padding: 10px;
-  width: 100%;
-  .cover{
-    display: block;
-    height: 170px;
-    width: 170px;
-    border-radius: 10px;
-  }
-  .content{
-    margin-left: 20px;
-    .A{
-      width: 100%;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      h2{
-        display: inline;
-        margin-left: 10px;
+  header {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+    width: 100%;
+
+    .cover {
+      display: block;
+      height: 170px;
+      width: 170px;
+      border-radius: 10px;
+    }
+
+    .content {
+      margin-left: 20px;
+
+      .A {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+
+        h2 {
+          display: inline;
+          margin-left: 10px;
+        }
+      }
+
+      .B {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+
+        span {
+          font-size: 14px;
+          color: #748aad;
+        }
+
+        a {
+          margin: 0 7px;
+          text-decoration: none
+        }
       }
     }
-    .B{
-      width: 100%;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      span{
-        font-size: 14px;
-        color: #748aad;
-      }
-      a{
-        margin: 0 7px;
-        text-decoration:none
-      }
-    }
   }
-}
 </style>
