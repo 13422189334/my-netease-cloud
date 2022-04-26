@@ -57,6 +57,18 @@ const routes = [
     ]
   },
   {
+    path: '/video',
+    name: '视频MV',
+    redirect: '/video/radioCenter',
+    component: () => import('@/views/Aside/video/index.vue'),
+    children: [
+      { path: 'video', component: () => import('@/views/Aside/video/pages/video/index.vue') },
+      { path: 'mv', component: () => import('@/views/Aside/video/pages/mv/index.vue') },
+      { path: 'allMV', component: () => import('@/views/Aside/video/pages/mv/all.vue') },
+      { path: 'rank', component: () => import('@/views/Aside/video/pages/rank/index.vue') }
+    ]
+  },
+  {
     path: '/podcast',
     name: '播客',
     redirect: '/podcast/radioCenter',
@@ -76,7 +88,7 @@ const routes = [
   },
   {
     path: '/fm',
-    name: 'FM',
+    name: '私人FM',
     component: () => import('@/views/Aside/fm/index.vue')
   },
   {
@@ -117,28 +129,6 @@ const routes = [
   {
     path: '/categoryList',
     component: () => import('@/views/RadioDetailed/categoryList.vue')
-  },
-  {
-    path: '/video',
-    component: () => import('@/views/Aside/video/video.vue'),
-    children: [
-      {
-        path: 'video',
-        component: () => import('@/views/Aside/video/pages/videoContent.vue')
-      },
-      {
-        path: '',
-        component: () => import('@/views/Aside/video/pages/MV.vue')
-      },
-      {
-        path: 'allMV',
-        component: () => import('@/views/Aside/video/pages/allMV.vue')
-      },
-      {
-        path: 'mvTopList',
-        component: () => import('@/views/Aside/video/pages/mvTopList.vue')
-      }
-    ]
   },
   {
     path: '/songDetail',
