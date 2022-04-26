@@ -39,11 +39,11 @@
     </div>
   </div>
   <!--  对话框-->
-  <myDialog ref="dialog" @create="getUserSongs" />
+  <createSongDialog ref="dialog" @create="getUserSongs" />
 </template>
 
 <script setup>
-import myDialog from './components/myDialog.vue'
+import createSongDialog from './components/createSongDialog.vue'
 import { computed, ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
