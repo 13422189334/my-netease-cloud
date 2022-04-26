@@ -30,6 +30,7 @@ const menus = ref([
   { index: '/findMusic/recommend', icon: 'iconfont icon-yinle1', title: '发现音乐' },
   { index: '/podcast', icon: 'iconfont icon-faxian', title: '播客' },
   { index: '/friend', icon: 'iconfont icon-tianjiapengyou', title: '动态' },
+  { index: '/video', icon: 'iconfont icon-FM_weixuanze', title: '视频MV' },
   { index: '/FM', icon: 'iconfont icon-FM_weixuanze', title: '私人FM' },
   { index: '/RecentPlay', icon: 'iconfont icon-time', title: '最近播放' },
   { index: '/myPodcast', icon: 'iconfont icon-tuijian', title: '我的播客' },
