@@ -12,7 +12,7 @@
     <template #default>
       <div v-if="array.length">
         <div class="video">
-          <videoCover :width="'285px'" :video-array="array" @toDetail="toDetail" />
+          <horizontalCover :width="'285px'" :video-array="array" @toDetail="toDetail" />
         </div>
       </div>
       <div v-else>
@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import videoCover from '@/views/Aside/video/components/videoCover.vue'
+import horizontalCover from '@/views/Aside/video/components/horizontalCover.vue'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getMvList } from '@/network/mv.js'

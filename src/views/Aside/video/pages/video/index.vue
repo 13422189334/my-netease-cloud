@@ -43,12 +43,13 @@
         <div v-for="item in 8" :key="item">
           <el-skeleton-item variant="image" class="skeleton-item-image" />
           <el-skeleton-item variant="p" class="skeleton-item-p" />
+          <el-skeleton-item variant="p" class="skeleton-item-p" />
         </div>
       </div>
     </template>
     <template #default>
       <main class="video-box">
-        <videoCover :width="'285px'" :video-array="videoArray" @toDetail="toVideoDetail" />
+        <horizontalCover :width="'285px'" :video-array="videoArray" @toDetail="toVideoDetail" />
       </main>
     </template>
   </el-skeleton>
@@ -64,7 +65,7 @@
 </template>
 
 <script setup>
-import videoCover from '../../components/videoCover.vue'
+import horizontalCover from '@/views/Aside/video/components/horizontalCover.vue'
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ArrowRight } from '@element-plus/icons-vue'
@@ -147,8 +148,10 @@ const changePage = value => {
       margin-top: 20px;
     }
     .skeleton-item-p {
-      height: 40px;
+      height: 20px;
       width: 285px;
+    }
+    .skeleton-item-p:nth-child(1) {
       margin-top: 5px;
     }
   }
