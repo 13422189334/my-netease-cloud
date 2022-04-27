@@ -10,7 +10,7 @@
     </div>
     <div class="bottom" :style="{ width: width }">
       <div class="name">{{ item.title }}</div>
-      <div class="label">{{ item.creator?.nickname }}</div>
+      <div class="label">{{ item.creator?.nickname || item.nickname }}</div>
     </div>
   </div>
 </template>
