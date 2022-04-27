@@ -59,7 +59,7 @@ const routes = [
   {
     path: '/video',
     name: '视频MV',
-    redirect: '/video/radioCenter',
+    redirect: '/video/video',
     component: () => import('@/views/Aside/video/index.vue'),
     children: [
       { path: 'video', component: () => import('@/views/Aside/video/pages/video/index.vue') },
