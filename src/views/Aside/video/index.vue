@@ -15,6 +15,6 @@ const menus = ref([
   { name: '视频', path: '/video/video' },
   { name: 'MV', path: '/video/mv' },
   { name: '全部MV', path: '/video/allMV' },
-  { name: '全部MV', path: '/video/rank' }
+  { name: 'MV排行榜', path: '/video/rank' }
 ])
 </script>
