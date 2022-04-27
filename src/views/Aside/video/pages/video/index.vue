@@ -7,12 +7,13 @@
         trigger="hover"
       >
         <template #reference>
-          <div class="left">
-            <el-button type="success" size="mini" round>{{ currentTag }}<i class="el-icon-arrow-right" /></el-button>
-          </div>
+          <el-button type="success" size="mini" round>
+            {{ currentTag }}
+            <el-icon><ArrowRight /></el-icon>
+          </el-button>
         </template>
-        <div class="title" :class="{ active: currentTag === '全部视频' }">全部视频</div>
-        <el-divider />
+        <div class="title" :class="{ active: currentTag === '全部视频' }" @click="change({ id: 0, name: '全部视频' })">全部视频</div>
+        <el-divider class="divider"/>
         <section class="category">
           <nav
             v-for="item in allTags"
@@ -29,20 +30,19 @@
       <div
         v-for="item in hotTags"
         :key="item.id"
-        class="rightTag"
-        :class="{ active: currentTag === item.name }"
+        :class="{ rightTag: true, active: currentTag === item.name }"
         @click="change(item)"
       >
         {{ item.name }}
       </div>
     </div>
   </header>
-  <el-skeleton :loading="!Boolean(videoArray.length)" :count="1" :animated="true" >
+  <el-skeleton :loading="!Boolean(videoArray.length)" :count="1" :animated="true">
     <template #template>
       <div class="video-box">
         <div v-for="item in 8" :key="item">
-          <el-skeleton-item variant="image" class="skeleton-item-image"/>
-          <el-skeleton-item variant="p" class="skeleton-item-p"/>
+          <el-skeleton-item variant="image" class="skeleton-item-image" />
+          <el-skeleton-item variant="p" class="skeleton-item-p" />
         </div>
       </div>
     </template>
@@ -67,9 +67,9 @@
 import videoCover from '../../components/videoCover.vue'
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { ArrowRight } from '@element-plus/icons-vue'
 import { getVideoAllTag, getVideoTags, getAllVideo, getCategoryVideo } from '@/network/video.js'
 
-// 跳转视频详情
 const router = useRouter()
 const toVideoDetail = id => {
   router.push(`/videoDetail?vid=${id}`)
@@ -95,6 +95,7 @@ const getVideoByAll = () => {
     videoArray.value = res.data.datas.map(e => ({ ...e.data }))
   })
 }
+
 onMounted(() => {
   getVideoAllTag().then(res => {
     allTags.value = res.data.data
@@ -105,15 +106,23 @@ onMounted(() => {
   getVideoByAll()
 })
 
+/**
+ * 点击分类标签事件
+ * @param item
+ */
 const change = item => {
   if (params.id !== item.id) {
     params.offset = 1
   }
   params.id = item.id
   currentTag.value = item.name
-  getVideoByCategory()
+  params.id ? getVideoByCategory() : getVideoByAll()
 }
 
+/**
+ * 点击页码事件
+ * @param value
+ */
 const changePage = value => {
   params.offset = value
   params.id ? getVideoByCategory() : getVideoByAll()
@@ -189,6 +198,10 @@ const changePage = value => {
     line-height: 30px;
   }
 
+  .divider {
+    margin: 10px 0 !important;
+  }
+
   .category {
     width: 100%;
     height: 400px;
@@ -207,6 +220,7 @@ const changePage = value => {
 
       &:hover {
         color: red;
+        cursor: pointer;
       }
     }
   }
