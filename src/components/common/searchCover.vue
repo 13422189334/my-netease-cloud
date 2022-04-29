@@ -1,13 +1,19 @@
 <template>
   <section>
-    <div v-for="item in data" :key="item.id" class="item" @click="goDetail(item.id)">
+    <div v-for="item in data" :key="item.id" class="item" @click="toDetail(item.id)">
       <div class="left">
         <el-avatar shape="square" :size="50" :src="item.picUrl" />
-        <span class="name">{{ item.name }} <span v-if="item.alias?.length">-</span> <template v-for="(v,i) in item.alias" :key="i">{{ v }}</template> </span>
+        <span class="name">
+          {{ item.name }}
+          <span v-if="item.alias?.length">-</span>
+          <template v-for="v in item.alias">{{ v }}</template>
+        </span>
       </div>
       <div v-if="item.artist?.name" style="color: #656161;">{{ item.artist.name }}</div>
       <div v-if="item.accountId" class="right">
-        <i class="el-icon-user" />
+        <el-icon>
+          <User />
+        </el-icon>
       </div>
     </div>
   </section>
@@ -15,41 +21,48 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue'
+import { User } from '@element-plus/icons-vue'
+
 defineProps({
   data: {
     type: Array
   }
 })
 
-const emit = defineEmits(['goDetail'])
+const emit = defineEmits(['toDetail'])
 
-const goDetail = id => {
-  emit('goDetail', id)
+const toDetail = id => {
+  emit('toDetail', id)
 }
 
 </script>
 
 <style scoped lang="less">
-  .item{
+  .item {
     width: 100%;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 10px;
-    &:hover{
+
+    &:hover {
       background: #ededed;
     }
-    .left{
+
+    .left {
       display: flex;
       align-items: center;
     }
-    .name{
+
+    .name {
       padding-left: 10px;
     }
-    .right{
+
+    .right {
       padding-right: 20px;
-      i{
+
+      i {
         font-size: 30px;
         color: red;
       }

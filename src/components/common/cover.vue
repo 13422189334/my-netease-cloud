@@ -11,6 +11,7 @@
 
 <script setup>
 import { defineProps } from 'vue'
+
 defineProps({
   image: {
     type: String
@@ -25,38 +26,43 @@ defineProps({
 </script>
 
 <style scoped lang="less">
-.cover{
-  width: 220px;
-  height: 260px;
-  position: relative;
-  &:hover .icon{
-    display: block;
-    transition: all 1s;
+  .cover {
+    width: 220px;
+    height: 260px;
+    position: relative;
+
+    &:hover .icon {
+      display: block;
+      transition: all 1s;
+    }
+
+    .icon {
+      display: none;
+      position: absolute;
+      top: 100px;
+      left: 49%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .image {
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+    }
+
+    .title {
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    .time {
+      color: silver;
+      font-size: 15px;
+      margin-top: 10px;
+    }
   }
-  .icon{
-    display: none;
-    position: absolute;
-    top: 100px;
-    left: 49%;
-    transform: translate(-50%,-50%);
-    width: 60px;
-    height: 60px;
-    background: white;
-    border-radius: 50%;
-  }
-  .image{
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-  }
-  .title{
-    margin-top: 5px;
-    text-align: center;
-  }
-  .time{
-    color: silver;
-    font-size: 15px;
-    margin-top: 10px;
-  }
-}
 </style>

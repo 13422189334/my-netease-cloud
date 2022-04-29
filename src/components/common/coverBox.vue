@@ -6,10 +6,13 @@
     </div>
     <div class="right">
       <div class="title">{{ title }}</div>
-      <div><el-tag size="mini" type="danger">{{ tags }}</el-tag></div>
+      <div>
+        <el-tag size="mini" type="danger">{{ tags }}</el-tag>
+      </div>
       <div class="label">
         <span class="label-bottom">{{ label }}</span>
-        <i class="el-icon-caret-right"><span class="count">{{ $formatNumber(count) }}</span></i>
+
+        <span class="count"><el-icon><CaretRight/></el-icon>{{ $formatNumber(count) }}</span>
         <i class="iconfont icon-time"><span class="time">{{ $formatTime(time).slice(-5) }}</span></i>
       </div>
     </div>
@@ -17,7 +20,9 @@
 </template>
 
 <script setup>
+import { CaretRight } from '@element-plus/icons-vue'
 import { defineProps } from 'vue'
+
 defineProps({
   image: {
     type: String,
@@ -48,59 +53,70 @@ defineProps({
 </script>
 
 <style scoped lang="less">
-.item{
-  width: 49%;
-  margin-top: 10px;
-  height: 100px;
-  display: flex;
-  justify-content: flex-start;
-  &:hover{
-    background: #f1ecec;
-  }
-  .left{
-    width: 100px;
+  .item {
+    width: 49%;
+    margin-top: 10px;
     height: 100px;
-    position: relative;
-    .image{
-      border-radius: 10px;
-    }
-    .icon{
-      width: 30px;
-      height: 30px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      right: 5px;
-      bottom: 5px;
-    }
-  }
-  .right{
-    margin-left: 20px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    .title{
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+    justify-content: flex-start;
+
+    &:hover {
+      background: #f1ecec;
     }
-    .label{
-      color: #656161;
-      .label-bottom{
-        margin-right: 10px;
-        color: #748aad;
+
+    .left {
+      width: 100px;
+      height: 100px;
+      position: relative;
+
+      .image {
+        border-radius: 10px;
       }
-      i{
-        font-size: 16px;
+
+      .icon {
+        width: 30px;
+        height: 30px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+      }
+    }
+
+    .right {
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      .title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .label {
         color: #656161;
-      }
-      .time{
-        color: silver;
-      }
-      .count{
-        margin-right: 10px;
+
+        .label-bottom {
+          margin-right: 10px;
+          color: #748aad;
+        }
+
+        i {
+          font-size: 16px;
+          color: #656161;
+        }
+
+        .time {
+          color: silver;
+        }
+
+        .count {
+          margin-right: 10px;
+        }
       }
     }
   }
-}
 </style>
