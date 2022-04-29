@@ -30,14 +30,12 @@ export function formatNewData(array) {
 export function formatMvData(array) {
   return array.map(item => {
     return {
-      data: {
-        coverUrl: item['cover'] || item['picUrl'],
-        vid: item.id,
-        cover: item.playCount,
-        title: item.name,
-        creator: {
-          nickname: item.artists.map(item => item.name).join(' / ')
-        }
+      coverUrl: item['cover'] || item['picUrl'],
+      vid: item.id,
+      cover: item.playCount,
+      title: item.name,
+      creator: {
+        nickname: item.artists.map(item => item.name).join(' / ')
       }
     }
   })
