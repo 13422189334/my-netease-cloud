@@ -11,7 +11,7 @@ const routes = [
     component: () => import('@/views/Search/index.vue'),
     children: [
       { path: 'song', meta: { name: '单曲' }, component: () => import('@/views/Search/pages/song.vue') },
-      { path: 'singer', meta: { name: '歌曲' }, component: () => import('@/views/Search/pages/singer.vue') },
+      { path: 'singer', meta: { name: '歌手' }, component: () => import('@/views/Search/pages/singer.vue') },
       { path: 'album', meta: { name: '专辑' }, component: () => import('@/views/Search/pages/album.vue') },
       { path: 'video', meta: { name: '视频' }, component: () => import('@/views/Search/pages/video.vue') },
       { path: 'songMenu', meta: { name: '歌单' }, component: () => import('@/views/Search/pages/songMenu.vue') }
