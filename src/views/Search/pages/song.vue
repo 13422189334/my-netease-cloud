@@ -1,5 +1,5 @@
 <template>
-    <SongList></SongList>
+  <SongList></SongList>
 </template>
 
 <script setup>
