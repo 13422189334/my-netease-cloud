@@ -13,7 +13,7 @@
         <el-popover
           placement="bottom"
           :width="320"
-          trigger="click"
+          trigger="hover"
         >
           <template #reference>
             <el-input
@@ -123,7 +123,7 @@ const search = () => {
       router.push(`/search`)
     })
   } else {
-    router.push(`/findMusic`)
+    router.push(`/findMusic/recommend`)
   }
 }
 
