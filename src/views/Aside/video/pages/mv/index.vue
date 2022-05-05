@@ -60,7 +60,7 @@
   <titleTop>网易出品</titleTop>
   <div ref="dom">
     <el-skeleton
-      :loading="!Boolean(footerMv.length)"
+      :loading="!Boolean(neteaseMv.length)"
       :count="1"
       :animated="true"
     >
@@ -77,7 +77,7 @@
       </template>
       <template #default>
         <section class="wy-box">
-          <horizontalCover :width="'285px'" :video-array="footerMv" @toDetail="toMvDetail" />
+          <horizontalCover :width="'285px'" :video-array="neteaseMv" @toDetail="toMvDetail" />
         </section>
       </template>
     </el-skeleton>
@@ -97,7 +97,7 @@ const current = ref('内地')
 const allTags = ref(['内地', '港台', '欧美', '日本', '韩国'])
 
 const newMV = ref([])
-const footerMv = ref([]) // 网易出品MV
+const neteaseMv = ref([]) // 网易出品MV
 const hotMv = ref([]) // 热门推荐
 
 const getHot = () => {
@@ -117,7 +117,7 @@ onMounted(async() => {
   getHot()
   await dataLazyLoading(dom)
   const res = await getFooterMv()
-  footerMv.value = formatMvData(res.data.data)
+  neteaseMv.value = formatMvData(res.data.data)
 })
 
 const tagChange = item => {
