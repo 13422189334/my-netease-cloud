@@ -1,44 +1,38 @@
 export function formatData(array) {
-  return array.map(item => {
-    return {
-      al: { picUrl: item.program.coverUrl },
-      id: item.program.mainSong.id,
-      name: item.program.name,
-      dt: item.program.duration,
-      long: item.score,
-      home: array[0].score,
-      label: item.program.dj.brand,
-      album: item.program.radio.category
-    }
-  })
+  return array.map(item => ({
+    al: { picUrl: item.program.coverUrl },
+    id: item.program.mainSong.id,
+    name: item.program.name,
+    dt: item.program.duration,
+    long: item.score,
+    home: array[0].score,
+    label: item.program.dj.brand,
+    album: item.program.radio.category
+  }))
 }
 
 export function formatNewData(array) {
-  return array.map(item => {
-    return {
-      al: { picUrl: item.picUrl },
-      id: item.id,
-      name: item.name,
-      long: item.score,
-      home: array[0].score,
-      label: item.creatorName,
-      album: item.category
-    }
-  })
+  return array.map(item => ({
+    al: { picUrl: item.picUrl },
+    id: item.id,
+    name: item.name,
+    long: item.score,
+    home: array[0].score,
+    label: item.creatorName,
+    album: item.category
+  }))
 }
 
 export function formatMvData(array) {
-  return array.map(item => {
-    return {
-      coverUrl: item['cover'] || item['picUrl'],
-      vid: item.id,
-      cover: item.playCount,
-      title: item.name,
-      creator: {
-        nickname: item.artists.map(item => item.name).join(' / ')
-      }
+  return array.map(item => ({
+    coverUrl: item['cover'] || item['picUrl'],
+    vid: item.id,
+    cover: item.playCount,
+    title: item.name,
+    creator: {
+      nickname: item.artists.map(item => item.name).join(' / ')
     }
-  })
+  }))
 }
 
 export function formatMvInfo(res) {
@@ -74,33 +68,27 @@ export function formatVideoInfo(res) {
 }
 
 export function formatVideoData(array) {
-  return array.map(item => {
-    return {
-      data: {
-        coverUrl: item.coverUrl,
-        vid: item.vid,
-        durationms: item.durationms,
-        cover: item.playTime,
-        title: item.title,
-        creator: {
-          nickname: item.creator.map(item => item.userName).join(' / ')
-        }
-      }
+  return array.map(item => ({
+    coverUrl: item.coverUrl,
+    vid: item.vid,
+    durationms: item.durationms,
+    cover: item.playTime,
+    title: item.title,
+    creator: {
+      nickname: item.creator.map(item => item.userName).join(' / ')
     }
-  })
+  }))
 }
 
 export function formatSongMenuData(array) {
-  return array.map((item, index) => {
-    return {
-      accountId: index,
-      id: item.id,
-      picUrl: item.coverImgUrl,
-      name: item.name,
-      num: item.trackCount,
-      label: item.creator.nickname
-    }
-  })
+  return array.map((item, index) => ({
+    accountId: index,
+    id: item.id,
+    picUrl: item.coverImgUrl,
+    name: item.name,
+    num: item.trackCount,
+    label: item.creator.nickname
+  }))
 }
 
 /**
@@ -140,14 +128,12 @@ export function formatAlbum(data) {
 }
 
 export function formatNewMusic(data) {
-  return data.map(item => {
-    return {
-      al: { id: item.id, picUrl: item.album.picUrl },
-      id: item.id,
-      name: item.name,
-      dt: item.duration,
-      label: item.album.artists[0].name,
-      album: item.album.name
-    }
-  })
+  return data.map(item => ({
+    al: { id: item.id, picUrl: item.album.picUrl },
+    id: item.id,
+    name: item.name,
+    dt: item.duration,
+    label: item.album.artists[0].name,
+    album: item.album.name
+  }))
 }
