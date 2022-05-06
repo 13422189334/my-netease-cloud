@@ -51,7 +51,7 @@ onMounted(async() => {
 })
 
 const toDetail = id => {
-  router.push(`/program?id=${id}`)
+  router.push(`/detail/podcast?id=${id}`)
   window.scrollTo(0, 0)
 }
 

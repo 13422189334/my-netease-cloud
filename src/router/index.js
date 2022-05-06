@@ -110,8 +110,12 @@ const routes = [
     component: () => import('@/views/Aside/mySongList/index.vue')
   },
   {
-    path: '/program',
-    component: () => import('@/views/RadioDetailed/program.vue')
+    path: '/detail',
+    meta: { name: '详情' },
+    component: () => import('@/views/Detail/index.vue'),
+    children: [
+      { path: 'podcast', meta: { name: '播客详情' }, component: () => import('@/views/Detail/podcast/index.vue') }
+    ]
   },
   {
     path: '/categoryList',

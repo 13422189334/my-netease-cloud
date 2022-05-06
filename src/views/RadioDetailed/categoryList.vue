@@ -28,7 +28,7 @@ getCategoryRadio(route.query.id).then(res => {
 })
 const router = useRouter()
 const goProgram = id => {
-  router.push(`/program?id=${id}`)
+  router.push(`/detail/podcast?id=${id}`)
 }
 </script>
 <script>

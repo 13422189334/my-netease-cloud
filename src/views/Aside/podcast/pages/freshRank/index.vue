@@ -26,6 +26,6 @@ onMounted(() => {
 
 const router = useRouter()
 const toDetail = id => {
-  router.push(`/program?id=${id}`)
+  router.push(`/detail/podcast?id=${id}`)
 }
 </script>
