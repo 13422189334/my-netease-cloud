@@ -52,10 +52,10 @@ const clickBanner = value => {
       store.commit('setSongList', formatAlbum(res.data.album))
       store.commit('setSongMusic', res.data.songs)
     })
-    router.push('/songDetail')
+    router.push('/detail/song')
   } else if (value.targetType === 1000) {
     store.dispatch('getSongList', value.targetId)
-    router.push('/songDetail')
+    router.push('/detail/song')
   } else if (value.targetType === 1004) {
     router.push(`/videoDetail?id=${value.targetId}`)
   }

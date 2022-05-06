@@ -75,7 +75,7 @@ const toSongMenu = () => {
  */
 const toDailySong = () => {
   store.dispatch('getDailySong').then(() => {
-    router.push('/songDetail')
+    router.push('/detail/song')
   })
 }
 
@@ -85,7 +85,7 @@ const toDailySong = () => {
  */
 const toSongListDetail = id => {
   store.dispatch('getSongList', id)
-  router.push('/songDetail')
+  router.push('/detail/song')
 }
 
 </script>

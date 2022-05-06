@@ -6,11 +6,11 @@
     </div>
     <el-button type="danger" :icon="CaretRight" round>播放全部</el-button>
   </div>
-  <SongList />
+  <SongTable />
 </template>
 
 <script setup>
-import SongList from '@/views/SongDetail/pages/SongList.vue'
+import SongTable from '@/views/Detail/song/pages/SongTable.vue'
 import { CaretRight } from '@element-plus/icons-vue'
 import { onMounted } from 'vue'
 import { useStore } from 'vuex'

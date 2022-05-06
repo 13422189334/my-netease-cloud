@@ -166,7 +166,7 @@ const change = value => {
 
 const toDetail = id => {
   store.dispatch('getSongList', id)
-  router.push('/songDetail')
+  router.push('/detail/song')
 }
 </script>
 

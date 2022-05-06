@@ -26,11 +26,11 @@
       </div>
     </header>
   </skeleton1>
-  <SongList />
+  <SongTable />
 </template>
 
 <script setup>
-import SongList from '@/views/SongDetail/pages/SongList.vue'
+import SongTable from '@/views/Detail/song/pages/SongTable.vue'
 import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { CaretRight, FolderAdd, Share, Upload } from '@element-plus/icons-vue'

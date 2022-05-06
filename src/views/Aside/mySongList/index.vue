@@ -100,7 +100,7 @@ const toDetail = item => {
     router.push('/myLike')
   } else {
     store.dispatch('getSongList', item.id)
-    router.push('/songDetail')
+    router.push('/detail/song')
   }
 }
 

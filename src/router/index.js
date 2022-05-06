@@ -120,21 +120,13 @@ const routes = [
     component: () => import('@/views/Detail/category/index.vue')
   },
   {
-    path: '/songDetail',
-    component: () => import('@/views/SongDetail/index.vue'),
+    path: '/detail/song',
+    meta: { name: '歌单详情' },
+    component: () => import('@/views/Detail/song/index.vue'),
     children: [
-      {
-        path: '',
-        component: () => import('@/views/SongDetail/pages/SongList.vue')
-      },
-      {
-        path: 'comment',
-        component: () => import('@/views/SongDetail/pages/Comment.vue')
-      },
-      {
-        path: 'collect',
-        component: () => import('@/views/SongDetail/pages/Collect.vue')
-      }
+      { path: '', meta: { name: '歌单列表' }, component: () => import('@/views/Detail/song/pages/SongTable.vue') },
+      { path: 'comment', meta: { name: '歌单评论' }, component: () => import('@/views/Detail/song/pages/Comment.vue') },
+      { path: 'collect', meta: { name: '歌单收藏着' }, component: () => import('@/views/Detail/song/pages/Collect.vue') }
     ]
   },
   {

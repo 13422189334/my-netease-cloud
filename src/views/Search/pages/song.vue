@@ -1,7 +1,7 @@
 <template>
-  <SongList></SongList>
+  <SongTable></SongTable>
 </template>
 
 <script setup>
-import SongList from '@/views/SongDetail/pages/SongList.vue'
+import SongTable from '@/views/Detail/song/pages/SongTable.vue'
 </script>

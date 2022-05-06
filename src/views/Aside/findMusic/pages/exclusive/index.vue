@@ -142,7 +142,7 @@ const select = (tag, index) => {
 const router = useRouter()
 const toSongListDetail = id => {
   store.dispatch('getSongList', id)
-  router.push('/songDetail')
+  router.push('/detail/song')
 }
 </script>
 

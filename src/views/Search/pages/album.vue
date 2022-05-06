@@ -34,7 +34,7 @@ const toDetail = id => {
   getAlbumContent(id).then(res => {
     store.commit('setSongList', formatAlbum(res.data.album))
     store.commit('setSongMusic', res.data.songs)
-    router.push('/songDetail')
+    router.push('/detail/song')
   })
 }
 </script>

@@ -58,12 +58,12 @@ const goSearch = ({ id, type }) => {
       getAlbumContent(id).then(res => {
         store.commit('setSongList', formatAlbum(res.data.album))
         store.commit('setSongMusic', res.data.songs)
-        router.push('/songDetail')
+        router.push('/detail/song')
       })
       break
     case 3:
       store.dispatch('getSongList', id)
-      router.push('/songDetail')
+      router.push('/detail/song')
       break
   }
 }
