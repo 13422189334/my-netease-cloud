@@ -19,8 +19,8 @@
             :type="button.type"
             :icon="button.icon"
             :disabled="button.disabled"
-            @click="button.handle"
             round
+            @click="button.handle"
           >
             播放全部
           </el-button>
@@ -74,7 +74,11 @@
     </el-row>
   </section>
 </template>
-
+<script>
+export default {
+  name: 'Podcast'
+}
+</script>
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
