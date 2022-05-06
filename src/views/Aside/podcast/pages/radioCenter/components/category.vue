@@ -37,7 +37,7 @@ onMounted(async() => {
 })
 const router = useRouter()
 const toCategoryList = (id, name) => {
-  router.push(`/categoryList?id=${id}&name=${name}`)
+  router.push(`/detail/category?id=${id}&name=${name}`)
 }
 </script>
 
