@@ -1,5 +1,4 @@
-import {getSongListComment} from '@/network/comment.js'
-
+import { getSongListComment } from '@/network/comment.js'
 
 const commentData = {
   state: {
@@ -15,8 +14,8 @@ const commentData = {
     }
   },
   actions: {
-    async getComment({commit}, payload) {
-      let res = await getSongListComment(payload)
+    async getComment({ commit }, payload) {
+      const res = await getSongListComment(payload)
       commit('setCommentData', res.data.hotComments)
     }
   }
