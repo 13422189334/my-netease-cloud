@@ -8,7 +8,11 @@
   </div>
   <SongTable />
 </template>
-
+<script>
+export default {
+  name: 'RecentPlay'
+}
+</script>
 <script setup>
 import SongTable from '@/views/Detail/song/pages/SongTable.vue'
 import { CaretRight } from '@element-plus/icons-vue'
