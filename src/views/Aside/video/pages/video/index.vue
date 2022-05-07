@@ -73,7 +73,7 @@ import { getVideoAllTag, getVideoTags, getAllVideo, getCategoryVideo } from '@/n
 
 const router = useRouter()
 const toVideoDetail = id => {
-  router.push(`/videoDetail?vid=${id}`)
+  router.push(`/detail/mv?vid=${id}`)
 }
 
 const currentTag = ref('全部视频')

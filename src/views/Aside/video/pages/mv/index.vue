@@ -127,7 +127,7 @@ const tagChange = item => {
 
 const router = useRouter()
 const toMvDetail = id => {
-  router.push(`/videoDetail?id=${id}`)
+  router.push(`/detail/mv?id=${id}`)
 }
 </script>
 

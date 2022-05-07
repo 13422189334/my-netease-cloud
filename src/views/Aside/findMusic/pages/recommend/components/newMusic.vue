@@ -63,7 +63,7 @@ const toNewMusic = () => {
 }
 
 const toMv = id => {
-  router.push(`/videoDetail?id=${id}`)
+  router.push(`/detail/mv?id=${id}`)
 }
 /**
  * 播放歌曲的事件总线

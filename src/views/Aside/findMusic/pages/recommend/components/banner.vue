@@ -57,7 +57,7 @@ const clickBanner = value => {
     store.dispatch('getSongList', value.targetId)
     router.push('/detail/song')
   } else if (value.targetType === 1004) {
-    router.push(`/videoDetail?id=${value.targetId}`)
+    router.push(`/detail/mv?id=${value.targetId}`)
   }
 }
 </script>

@@ -130,6 +130,10 @@ const routes = [
     ]
   },
   {
+    path: '/detail/mv',
+    component: () => import('@/views/Detail/mv/index.vue')
+  },
+  {
     path: '/SingerContent',
     component: () => import('@/views/SingerContent/SingerContent.vue'),
     children: [
@@ -155,10 +159,6 @@ const routes = [
         component: () => import('@/views/SingerContent/pages/similaritySinger.vue')
       }
     ]
-  },
-  {
-    path: '/VideoDetail',
-    component: () => import('@/views/VideoDetail/VideoDetail.vue')
   }
 ]
 const router = createRouter({

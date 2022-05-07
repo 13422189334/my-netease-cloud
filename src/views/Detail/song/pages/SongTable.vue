@@ -74,7 +74,7 @@ const handleCurrentChange = (row) => {
  * 跳转详情
  */
 const toDetail = id => {
-  router.push(`/videoDetail?id=${id}`)
+  router.push(`/detail/mv?id=${id}`)
 }
 
 /**

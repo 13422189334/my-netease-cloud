@@ -45,7 +45,7 @@ onMounted(() => {
 
 const router = useRouter()
 const toDetail = id => {
-  router.push(`/videoDetail?vid=${id}`)
+  router.push(`/detail/mv?vid=${id}`)
 }
 </script>
 

@@ -119,7 +119,7 @@ const change = value => {
 
 const router = useRouter()
 const toDetail = id => {
-  router.push(`/videoDetail?id=${id}`)
+  router.push(`/detail/mv?id=${id}`)
 }
 </script>
 

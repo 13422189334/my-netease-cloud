@@ -36,7 +36,7 @@ onMounted(async() => {
 })
 
 const toMvDetail = id => {
-  router.push('/videoDetail?id=' + id)
+  router.push('/detail/mv?id=' + id)
 }
 const toUnique = () => {
   router.push('/unique')
