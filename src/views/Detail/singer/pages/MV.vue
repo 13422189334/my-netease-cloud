@@ -1,10 +1,12 @@
 <template>
-  <br>
   <main v-if="data.length" class="box">
     <div v-for="item in data" :key="item.id" class="cover" @click="toDetail(item.id)">
       <el-image :src="item.imgurl" class="image" />
       <div class="title">{{ item.name }}</div>
-      <i class="el-icon-caret-right"><span>{{ $formatNumber(item.playCount) }}</span></i>
+      <div class="count">
+        <el-icon :size="15"><CaretRight/></el-icon>
+        <span>{{ $formatNumber(item.playCount) }}</span>
+      </div>
       <span class="time">{{ $formatTime(item.duration).slice(-5) }}</span>
     </div>
   </main>
@@ -13,20 +15,21 @@
 </template>
 
 <script setup>
-import { getSingerMV } from '@/network/singer.js'
-import { computed, onMounted, ref } from 'vue'
+import { computed, watch, ref } from 'vue'
+import { CaretRight } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import { getSingerMV } from '@/network/singer.js'
 
 const router = useRouter()
 const store = useStore()
 const id = computed(() => store.state.singer.singerId)
 const data = ref([])
 
-onMounted(async() => {
-  const res = await getSingerMV(id.value)
+watch(id, async(val) => {
+  const res = await getSingerMV(val)
   data.value = res.data.mvs
-})
+}, { immediate: true, deep: true })
 const toDetail = id => {
   router.push(`/detail/mv?id=${id}`)
 }
@@ -34,16 +37,15 @@ const toDetail = id => {
 
 <style scoped lang="less">
   .box {
-    height: 400px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 
     .cover {
-      width: 220px;
-      height: 160px;
+      width: 285px;
       position: relative;
       text-align: center;
+      margin-bottom: 5px;
 
       .title {
         margin-top: 5px;
@@ -55,16 +57,16 @@ const toDetail = id => {
 
       .image {
         width: 100%;
-        height: 140px;
+        height: 160px;
         border-radius: 10px;
       }
 
-      i {
+      .count {
         position: absolute;
         color: white;
-        font-size: 20px;
-        top: 5px;
-        right: 10px;
+        font-size: 15px;
+        top: 4px;
+        right: 6px;
 
         span {
           font-size: 15px;
