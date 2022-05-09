@@ -131,6 +131,7 @@ const routes = [
   },
   {
     path: '/detail/mv',
+    meta: { name: 'mv详情' },
     component: () => import('@/views/Detail/mv/index.vue')
   },
   {
