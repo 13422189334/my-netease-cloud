@@ -2,8 +2,8 @@
   <el-menu :default-active="$route.path" mode="horizontal" router class="nav">
     <el-menu-item
       v-for="menuItem in menus"
-      :index="menuItem.index"
       :key="menuItem.index"
+      :index="menuItem.index"
     >
       {{ menuItem.title }}
     </el-menu-item>
@@ -15,6 +15,11 @@
   </router-view>
 </template>
 
+<script>
+export default {
+  name: 'FindMusic'
+}
+</script>
 <script setup>
 import { ref } from 'vue'
 

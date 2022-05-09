@@ -9,7 +9,7 @@
     <el-main :style="main" id="main">
       <el-scrollbar>
         <router-view v-slot="{Component}">
-          <keep-alive include="findMusic" :exclude="['Podcast','Category','Video','singerContent','RecentPlay']">
+          <keep-alive include="FindMusic" :exclude="['Podcast','Category','Video','singerContent','RecentPlay']">
             <component :is="Component"/>
           </keep-alive>
         </router-view>
