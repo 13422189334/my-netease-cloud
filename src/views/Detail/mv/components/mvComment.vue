@@ -20,7 +20,7 @@
           <div class="left">
             <p>
               <span class="user">
-                {{ item.user.nickname }} ({{ $formatTime(item.time) }}):
+                {{ item.user.nickname }} ( {{ $formatTime(item.time) }} ):
               </span>
               {{ item.content }}
             </p>
