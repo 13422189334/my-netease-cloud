@@ -37,6 +37,7 @@
           :label="item.artists ||item.creator"
           :time="item.duration"
           :name="item.name || item.title"
+          @click="toDetail(item.id || item.vid)"
         />
       </div>
     </div>
@@ -53,8 +54,8 @@
 <script setup>
 import mvComment from '@/views/Detail/mv/components/mvComment.vue'
 import mvCover from '@/views/Detail/mv/components/mvCover.vue'
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, watch, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { Pointer, FolderAdd, Share, Upload } from '@element-plus/icons-vue'
 import {
   getVideoUrl,
@@ -69,42 +70,49 @@ import {
 import { formatMvInfo, formatVideoInfo } from '@/utlis/formatData.js'
 
 const route = useRoute()
+const router = useRouter()
 
-const id = route.query.vid || route.query.id
+const id = computed(() => route.query.vid || route.query.id)
 const url = ref('')
 const title = ref()
 const similarMv = ref([]) // 类似视频、MV
 const detail = ref({}) // 视频、MV 详情
 const comment = ref([]) // 评论
 
-if (Object.keys(route.query)[0] === 'vid') {
-  title.value = '视频详情'
-  getVideoDetail(id).then(res => {
-    detail.value = formatVideoInfo(res)
-  })
-  getVideoUrl(id).then(res => {
-    url.value = res.data.urls[0].url
-  })
-  getSimilarVideo(id).then(res => {
-    similarMv.value = res.data.data
-  })
-  getVideoComment(id).then(res => {
-    comment.value = res.data.comments
-  })
-} else {
-  title.value = 'MV详情'
-  getMvDetail(id).then(res => {
-    detail.value = formatMvInfo(res)
-  })
-  getMvUrl(id).then(res => {
-    url.value = res.data.data.url
-  })
-  getSimilarMv(id).then(res => {
-    similarMv.value = res.data.mvs
-  })
-  getMvComment(id).then(res => {
-    comment.value = res.data.hotComments
-  })
+watch(id, (val) => {
+  if (Object.keys(route.query)[0] === 'vid') {
+    title.value = '视频详情'
+    getVideoDetail(val).then(res => {
+      detail.value = formatVideoInfo(res)
+    })
+    getVideoUrl(val).then(res => {
+      url.value = res.data.urls[0].url
+    })
+    getSimilarVideo(val).then(res => {
+      similarMv.value = res.data.data
+    })
+    getVideoComment(val).then(res => {
+      comment.value = res.data.comments
+    })
+  } else {
+    title.value = 'MV详情'
+    getMvDetail(val).then(res => {
+      detail.value = formatMvInfo(res)
+    })
+    getMvUrl(val).then(res => {
+      url.value = res.data.data.url
+    })
+    getSimilarMv(val).then(res => {
+      similarMv.value = res.data.mvs
+    })
+    getMvComment(val).then(res => {
+      comment.value = res.data.hotComments
+    })
+  }
+}, { immediate: true, deep: true })
+
+const toDetail = id => {
+  router.replace(`/detail/mv?${Object.keys(route.query)[0]}=${id}`)
 }
 
 const pageChange = page => {

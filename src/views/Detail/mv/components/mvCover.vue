@@ -1,9 +1,10 @@
 <template>
-  <div class="cover">
+  <div class="cover" @click="toDetail">
     <div class="left">
       <el-image :src="image" class="image" />
       <div class="play">
         <i class="el-icon-caret-right" />
+        <el-icon><CaretRight/></el-icon>
         <span class="playCount">{{ $formatNumber(count) }}</span>
       </div>
       <span v-if="time" class="time">{{ $formatTime(time).slice(-5) }}</span>
@@ -11,7 +12,7 @@
     <div class="right">
       <div class="name">{{ name }}</div>
       <div v-if="Array.isArray(label)" class="label">
-        <div v-for="(v,i) in label" :key="i">{{ v.name || v.userName }}</div>
+        {{ label.map(v => v.name || v.userName ).join(' , ')}}
       </div>
       <div v-else class="label">{{ label }}</div>
     </div>
@@ -20,7 +21,12 @@
 
 <script setup>
 import { defineProps } from 'vue'
-defineProps({
+import { useRouter, useRoute } from 'vue-router'
+import { CaretRight } from '@element-plus/icons-vue'
+const props = defineProps({
+  mvId: {
+    type: Number
+  },
   image: {
     type: String
   },
@@ -37,6 +43,12 @@ defineProps({
     type: Number
   }
 })
+
+const router = useRouter()
+const route = useRoute()
+const toDetail = () => {
+  router.replace(`/detail/mv?${Object.keys(route.query)[0]}=${props.mvId}`)
+}
 </script>
 
 <style scoped lang="less">
@@ -61,8 +73,8 @@ defineProps({
       .play {
         position: absolute;
         color: white;
-        right: 2px;
-        top: 2px;
+        right: 4px;
+        top: 1px;
         display: flex;
         justify-content: flex-start;
         align-items: center;
