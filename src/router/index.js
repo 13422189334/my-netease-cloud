@@ -110,6 +110,18 @@ const routes = [
     component: () => import('@/views/Aside/mySongList/index.vue')
   },
   {
+    path: '/detail/singer',
+    meta: { name: '歌手详情' },
+    component: () => import('@/views/Detail/singer/index.vue'),
+    children: [
+      { path: '', meta: { name: '歌单' }, component: () => import('@/views/Detail/singer/pages/music.vue') },
+      { path: 'album', meta: { name: '专辑' }, component: () => import('@/views/Detail/singer/pages/album.vue') },
+      { path: 'mv', meta: { name: 'MV' }, component: () => import('@/views/Detail/singer/pages/MV.vue') },
+      { path: 'detail', meta: { name: '歌手详情' }, component: () => import('@/views/Detail/singer/pages/detail.vue') },
+      { path: 'similar', meta: { name: '相似歌手' }, component: () => import('@/views/Detail/singer/pages/similar.vue') }
+    ]
+  },
+  {
     path: '/detail/podcast',
     meta: { name: '播客详情' },
     component: () => import('@/views/Detail/podcast/index.vue')
@@ -133,33 +145,6 @@ const routes = [
     path: '/detail/mv',
     meta: { name: 'mv详情' },
     component: () => import('@/views/Detail/mv/index.vue')
-  },
-  {
-    path: '/SingerContent',
-    component: () => import('@/views/SingerContent/SingerContent.vue'),
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/SingerContent/pages/singerMusic.vue')
-      },
-      {
-        path: 'album',
-        component: () => import('@/views/SingerContent/pages/album.vue')
-      },
-      {
-        path: 'mv',
-        component: () => import('@/views/SingerContent/pages/MV.vue')
-      },
-      {
-        path: 'singerDetail',
-        name: 'singerDetail',
-        component: () => import('@/views/SingerContent/pages/singerDetail.vue')
-      },
-      {
-        path: 'similaritySinger',
-        component: () => import('@/views/SingerContent/pages/similaritySinger.vue')
-      }
-    ]
   }
 ]
 const router = createRouter({
