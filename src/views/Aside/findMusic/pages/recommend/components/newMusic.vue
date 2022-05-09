@@ -75,79 +75,92 @@ const playMusic = item => {
 </script>
 
 <style scoped lang="less">
-.mr-10 {
-  margin-right: 10px;
-}
-.hover:hover{
-  color: rgba(49, 48, 48, 0.8);
-}
-.hover:after {
-  content: ' / ';
-}
-.hover:nth-last-child(1):after {
-  content: '';
-}
-.newMusic{
-  width: 100%;
-  height: 250px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  .item{
-    width: 33%;
-    height: 50px;
+  .mr-10 {
+    margin-right: 10px;
+  }
+
+  .hover:hover {
+    color: rgba(49, 48, 48, 0.8);
+  }
+
+  .hover:after {
+    content: ' / ';
+  }
+
+  .hover:nth-last-child(1):after {
+    content: '';
+  }
+
+  .newMusic {
+    width: 100%;
+    height: 250px;
     display: flex;
-    justify-content: flex-start;
-    margin-top: 10px;
-    &:hover{
-      background: #ededed;
-    }
-    .left{
-      width: 50px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .item {
+      width: 33%;
       height: 50px;
-      position: relative;
-      .image{
-        border-radius: 10px;
-      }
-      .icon{
-        width: 20px;
-        height: 20px;
-        background: white;
-        border-radius: 50%;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-50%);
-      }
-    }
-    .right{
-      width: 80%;
-      margin-left: 10px;
       display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      .tags{
-        color: silver;
-        font-size: 13px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      justify-content: flex-start;
+      margin-top: 10px;
+
+      &:hover {
+        background: #ededed;
       }
-      .title{
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+
+      .left {
+        width: 50px;
+        height: 50px;
+        position: relative;
+
+        .image {
+          border-radius: 10px;
+        }
+
+        .icon {
+          width: 20px;
+          height: 20px;
+          background: white;
+          border-radius: 50%;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .right {
+        width: 80%;
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .tags {
+          color: silver;
+          font-size: 13px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .title {
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
       }
     }
   }
-}
 
-&:deep (.item){
-  width: 33%;
-}
-&:deep (.left){
-  width: 50px;
-  height: 50px;
-}
+  /deep/ .item {
+    width: 33%;
+  }
+
+  /deep/ .left {
+    width: 50px;
+    height: 50px;
+  }
 </style>

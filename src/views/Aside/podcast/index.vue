@@ -8,7 +8,6 @@
       {{ menuItem.title }}
     </el-menu-item>
   </el-menu>
-  <br>
   <router-view v-slot="{Component}">
     <keep-alive>
       <component :is="Component" />

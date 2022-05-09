@@ -12,7 +12,6 @@
     <div class="button">
       <el-button type="success" round @click="sendComment">评论</el-button>
     </div>
-    <br>
     <el-descriptions v-if="comment.length" title="精彩评论" direction="vertical" :column="2">
       <template #extra>
         <el-button type="info" round size="mini" :icon="RefreshLeft" @click="changeComment">
@@ -169,11 +168,11 @@ const reply = item => {
     padding: 20px 10px;
 
     .button {
-      margin-top: 10px;
+      padding: 10px 0;
       text-align: right;
     }
 
-    &:deep (.el-textarea__inner) {
+    /deep/ .el-textarea__inner {
       min-height: 80px !important;
     }
 

@@ -78,7 +78,7 @@ const change = value => {
       text-align: right;
     }
 
-    &:deep (.el-textarea__inner) {
+    /deep/ .el-textarea__inner {
       min-height: 80px !important;
     }
 
