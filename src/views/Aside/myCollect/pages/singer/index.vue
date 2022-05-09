@@ -51,7 +51,7 @@ const router = useRouter()
 
 const current = id => {
   store.commit('setSingerId', id)
-  router.push(`/SingerContent`)
+  router.push(`/detail/singer`)
 }
 </script>
 

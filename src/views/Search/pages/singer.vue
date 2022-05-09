@@ -29,6 +29,6 @@ onMounted(() => {
 const router = useRouter()
 const toDetail = id => {
   store.commit('setSingerId', id)
-  router.push(`/SingerContent`)
+  router.push(`/detail/singer`)
 }
 </script>

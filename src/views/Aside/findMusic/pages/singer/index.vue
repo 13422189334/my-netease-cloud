@@ -130,7 +130,7 @@ const router = useRouter()
 const store = useStore()
 const toSingerDetail = id => {
   store.commit('setSingerId', id)
-  router.push(`/SingerContent`)
+  router.push(`/detail/singer`)
 }
 
 </script>

@@ -52,7 +52,7 @@ const goSearch = ({ id, type }) => {
       break
     case 1:
       store.commit('setSingerId', id)
-      router.push(`/SingerContent`)
+      router.push(`/detail/singer`)
       break
     case 2:
       getAlbumContent(id).then(res => {
