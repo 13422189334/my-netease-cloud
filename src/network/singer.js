@@ -47,7 +47,6 @@ export function getSingerAlbum(id, offset) {
     url: '/artist/album',
     params: {
       id,
-      limit: 10,
       offset
     }
   })
