@@ -8,7 +8,7 @@ let loadingInstance
 
 export function request(config) {
   const instance = axios.create({
-    baseURL: `https://music-zlq.vercel.app`,
+    baseURL: `http://82.157.247.15`,
     timeout: 10000,
     withCredentials: true
   })
